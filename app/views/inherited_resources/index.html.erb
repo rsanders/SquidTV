@@ -1,0 +1,25 @@
+<p><%= link_to "New", new_polymorphic_path(controller_name.singularize) %></p>
+
+<% if collection.any? %>
+<table>
+  <thead>
+    <tr>
+    <% collection.first.attributes.each do |a| %>
+      <th><%= a[0] %></th>
+    <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <% collection.each do |r| %>
+    <tr>
+    <% r.attributes.each do |a| %>
+      <td><%= a[1] %></td>
+    <% end %>
+      <td><%= link_to "Show", r %></td>
+      <td><%= link_to "Edit", edit_polymorphic_path(r) %></td>
+      <td><%= link_to "Destroy", r, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

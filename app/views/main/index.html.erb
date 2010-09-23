@@ -1,0 +1,13 @@
+<table width="100%">
+<%- @files.each do |file|
+    episode = file.episode_spec
+-%>
+<tr>
+  <% if episode %>
+      <td path="<%= file.path %>"><%= episode.series[0..20] %></td><td><%= episode.season %></td><td><%= episode.episode %></td><td align="right"><%= time_ago_in_words file.modified_at %></td>
+  <%- else -%>
+      <td colspan="3" path="<%= file.path %>"><%= file.name[0..20] %></td><td align="right"><%= time_ago_in_words file.modified_at %></td>
+  <%- end -%>
+</tr>
+<%- end -%>
+</table>

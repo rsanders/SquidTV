@@ -1,0 +1,31 @@
+
+development:
+  debug: true
+
+
+test: &test
+  debug: true
+
+cucumber:
+  <<: *test
+
+staging:
+  debug: true
+
+## final settings, but not yet
+production:
+  debug: false
+
+## pre-production, june 22
+#production:
+#  site_root_url: http://prod.zeevex.com
+#  debug: true
+#  incomm_url: http://milws.incomm.com:8080/transferedvalue/gateway
+#  mail_domain: prod.zeevex.com
+#  google_analytics_code: UA-6469953-1
+
+
+all:
+  roots:
+   tv: "/Volumes/fantom/Shared/media/tv"
+   movies: "/Volumes/fantom/Shared/media/movies"
