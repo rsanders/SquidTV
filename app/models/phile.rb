@@ -6,12 +6,14 @@ class Phile < ActiveRecord::Base
   has_many :episodes
   has_many :movies
 
+  scope :deleted, :conditions => ["deleted_at is not null"]
+  
   before_validation :set_empty_fields_from_file
 
   validates_uniqueness_of :path
 
   def set_empty_fields_from_file
-
+    self.format ||= filename.split('.').last.downcase if filename.include?('.')
   end
 
   class << self
@@ -49,6 +51,24 @@ class Phile < ActiveRecord::Base
       list.sort {|a,b| b.file_modified_at <=> a.file_modified_at }
     end
   end
+
+  def mark_alive!
+    self.update_attributes! :updated_at => Time.now
+  end
+
+  def mark_deleted!
+    self.update_attributes! :deleted_at => Time.now
+  end
+
+  def deleted?
+    !! deleted_at
+  end
+
+  def available?
+    !deleted? && self.media_root && self.media_root.active && File.exists?(self.path)
+  end
+
+  ## parsing
 
   def group
     if self.media_root and path.start_with? self.media_root.path

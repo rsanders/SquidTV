@@ -19,6 +19,8 @@ class CreatePhiles < ActiveRecord::Migration
       t.datetime :file_modified_at
       t.datetime :file_accessed_at
 
+      t.datetime :processed_at
+
       t.datetime :seen_at
       t.datetime :deleted_at
 

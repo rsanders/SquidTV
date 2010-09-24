@@ -27,8 +27,9 @@ class MediaScanner
         root.scan_if_scheduled
       end
     end
-
-
   end
 
+  def update_file(path)
+    raise "Unimplemented"
+  end
 end

@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
     t.datetime "file_created_at"
     t.datetime "file_modified_at"
     t.datetime "file_accessed_at"
+    t.datetime "processed_at"
     t.datetime "seen_at"
     t.datetime "deleted_at"
     t.datetime "created_at"
