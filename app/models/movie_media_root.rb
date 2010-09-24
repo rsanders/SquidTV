@@ -1,0 +1,2 @@
+class MovieMediaRoot < MediaRoot
+end

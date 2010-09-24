@@ -1,7 +1,7 @@
 class CreateMediaRoots < ActiveRecord::Migration
   def self.up
     create_table :media_roots do |t|
-      t.string   :type, :default => "tvshows"
+      t.string   :type, :default => "EpisodeMediaRoot"
       t.text     :path, :null => false
       t.boolean  :active, :default => true
 
@@ -13,6 +13,8 @@ class CreateMediaRoots < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :media_roots, :path, :unique => true
   end
 
   def self.down

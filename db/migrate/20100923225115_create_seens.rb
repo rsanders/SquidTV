@@ -1,7 +1,7 @@
 class CreateSeens < ActiveRecord::Migration
   def self.up
     create_table :seens do |t|
-      t.string   :type, :default => "episode"
+      t.string   :object_type, :default => "episode"
 
       t.integer  :episode_id
       t.integer  :movie_id

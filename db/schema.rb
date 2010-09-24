@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
   add_index "episodes", ["show_id", "season", "episode"], :name => "index_episodes_on_show_id_and_season_and_episode"
 
   create_table "media_roots", :force => true do |t|
-    t.string   "type",        :default => "tvshows"
-    t.text     "path",                               :null => false
+    t.string   "type",        :default => "EpisodeMediaRoot"
+    t.text     "path",                                        :null => false
     t.boolean  "active",      :default => true
     t.datetime "scanned_at"
     t.integer  "scan_period", :default => 300
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "media_roots", ["path"], :name => "index_media_roots_on_path", :unique => true
 
   create_table "movies", :force => true do |t|
     t.integer  "phile_id"
@@ -74,10 +76,10 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
 
   add_index "philes", ["file_modified_at", "deleted_at", "seen_at"], :name => "index_philes_on_file_modified_at_and_deleted_at_and_seen_at"
   add_index "philes", ["filename"], :name => "index_philes_on_filename"
-  add_index "philes", ["path"], :name => "index_philes_on_path"
+  add_index "philes", ["path"], :name => "index_philes_on_path", :unique => true
 
   create_table "seens", :force => true do |t|
-    t.string   "type",       :default => "episode"
+    t.string   "object_type", :default => "episode"
     t.integer  "episode_id"
     t.integer  "movie_id"
     t.integer  "phile_id"

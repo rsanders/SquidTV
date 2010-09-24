@@ -3,7 +3,12 @@ require 'find'
 class Phile < ActiveRecord::Base
   belongs_to :media_root
 
+  has_many :episodes
+  has_many :movies
+
   before_validation :set_empty_fields_from_file
+
+  validates_uniqueness_of :path
 
   def set_empty_fields_from_file
 
@@ -86,10 +91,4 @@ class Phile < ActiveRecord::Base
     EpisodeSpec.new group, 0, 0, self.filename
   end
 
-end
-
-class EpisodePhile < Phile
-end
-
-class MovieFile < Phile
 end

@@ -1,0 +1,2 @@
+class EpisodeMediaRoot < MediaRoot
+end

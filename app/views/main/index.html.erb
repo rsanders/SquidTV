@@ -18,7 +18,7 @@
 <%- @groups.each do |pair|
     (group, files) = pair
 -%>
-<tr class="group"><td colspan="3">Downloaded <%= time_ago_in_words group %> ago</td></tr>
+<tr class="group"><td colspan="3">Downloaded less than <%= time_ago_in_words group %> ago</td></tr>
 <%-
     files.each do |file|
         episode = file.episode_spec

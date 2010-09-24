@@ -25,7 +25,7 @@ class CreatePhiles < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :philes, :path
+    add_index :philes, :path, :unique => true
     add_index :philes, :filename
     add_index :philes, [:file_modified_at, :deleted_at, :seen_at]
   end

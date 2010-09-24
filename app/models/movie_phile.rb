@@ -1,0 +1,2 @@
+class MoviePhile < Phile
+end

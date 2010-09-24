@@ -1,0 +1,2 @@
+class EpisodePhile < Phile
+end
