@@ -22,6 +22,19 @@ gem 'inherited_resources_views'
 gem 'responders'
 gem 'has_scope'
 
+# for filesystem event watching
+# gem 'fssm'
+
+# gem 'rack-bug'
+
+gem 'newrelic_rpm', '2.13.1'
+
+# video processing
+gem 'streamio-ffmpeg'
+
+# for statfs
+gem 'ffi'
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
