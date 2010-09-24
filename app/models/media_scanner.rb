@@ -1,25 +1,34 @@
 class MediaScanner
 
+  attr_accessor :roots
+
   def self.singleton
     @singleton ||= MediaScanner.new
   end
 
-  def raze_and_build(roots = nil)
-    roots ||= MediaRoot.active
+  def initialize(roots = nil)
+    self.roots = roots || MediaRoot.active
+  end
 
+  def raze_and_build
     Phile.transaction do
-      Episode.delete_all
-      Show.delete_all
-
-      Movie.delete_all
-      
-      Phile.delete_all
+      Phile.destroy_all
 
       roots.each do |root|
-        Phile.list_all(root).map &:save!
+        root.scan
       end
 
     end
+  end
+
+  def tick
+    Phile.transaction do
+      roots.each do |root|
+        root.scan_if_scheduled
+      end
+    end
+
+
   end
 
 end

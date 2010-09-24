@@ -31,7 +31,7 @@ class Phile < ActiveRecord::Base
     end
 
     def list_all(root = nil, options = {:sort => :newest})
-      root ||= self.media_root
+      raise "Must specify media root" unless root
 
       list = []
       Find.find(root.path) do |path|
