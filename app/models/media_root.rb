@@ -59,6 +59,11 @@ class MediaRoot < ActiveRecord::Base
         phile.mark_deleted!
       end
 
+      # do the heavy lifting of turning philes into episodes/movies
+      philes.unresolved.not_processed_recently.each do |phile|
+        phile.process
+      end
+
     end
   end
 

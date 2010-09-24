@@ -8,7 +8,13 @@ class Phile < ActiveRecord::Base
 
   scope :deleted, :conditions => ["deleted_at is not null"]
   scope :existing, :conditions => ["deleted_at is null"]
-  
+
+  scope :processed, :conditions => ["processed_at IS NOT NULL"]
+  scope :unprocessed, :conditions => ["processed_at IS NULL"]
+  scope :not_processed_recently, :conditions => ["processed_at IS NULL OR processed_at < ?",
+                                                 Time.now.utc - 2.hours.ago]
+  scope :unresolved, :conditions => ["resolved = ?", false]
+
   before_validation :set_empty_fields_from_file
 
   validates_uniqueness_of :path
@@ -64,6 +70,10 @@ class Phile < ActiveRecord::Base
 
   def mark_processed!
     self.update_attributes! :processed_at => Time.now
+  end
+
+  def mark_resolved!
+    self.update_attributes! :resolved => true
   end
 
   def process

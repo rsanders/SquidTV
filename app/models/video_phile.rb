@@ -23,6 +23,7 @@ class VideoPhile < Phile
       episode = show.add_episode spec.season, spec.episode, spec.title
       episode.phile = self
       episode.save
+      self.update_attributes :resolved => true
     end
 
     true

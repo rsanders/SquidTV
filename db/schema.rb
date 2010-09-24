@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100924224224) do
+ActiveRecord::Schema.define(:version => 20100924224934) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20100924224224) do
     t.datetime "updated_at"
     t.integer  "inum"
     t.string   "device"
+    t.boolean  "resolved",         :default => false
   end
 
   add_index "philes", ["file_modified_at", "deleted_at", "seen_at"], :name => "index_philes_on_file_modified_at_and_deleted_at_and_seen_at"
