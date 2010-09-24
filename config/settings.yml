@@ -26,6 +26,8 @@ production:
 
 
 all:
+  tvdb_api_key: 630FCFC5489C56B0
+
   roots:
    tv: "/Volumes/fantom/Shared/media/tv"
    movies: "/Volumes/fantom/Shared/media/movies"

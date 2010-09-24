@@ -4,6 +4,13 @@ class Show < ActiveRecord::Base
 
   before_save :update_aliases
 
+  validates_uniqueness_of  :name
+  validates_uniqueness_of  :sortable_name
+  validates_uniqueness_of  :tvdb_id, :allow_nil => true, :allow_blank => true
+  validates_uniqueness_of  :url, :allow_nil => true, :allow_blank => true
+
+
+
   class << self
     def make_sortable_string(string)
       string = string.titleize
@@ -23,7 +30,7 @@ class Show < ActiveRecord::Base
   end
 
   def update_aliases
-    if name_changed? || new?
+    if name_changed? || new_record?
       make_aliases
     end
   end
@@ -41,5 +48,15 @@ class Show < ActiveRecord::Base
       return true if name.downcase == string.downcase || sortable_name.downcase == string.downcase
     end
     base.where("LOWER(name) = ?", string.downcase).count > 0
+  end
+
+  def add_episode(season, number, title = nil)
+    epi = self.episodes.find_or_initialize_by_season_and_number :season => season, :number => number
+    if epi.new_record?
+      epi.title = title
+      epi.save!
+    end
+
+    epi
   end
 end

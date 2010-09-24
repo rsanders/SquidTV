@@ -3,8 +3,8 @@ require 'find'
 class Phile < ActiveRecord::Base
   belongs_to :media_root
 
-  has_many :episodes
-  has_many :movies
+  has_one  :movie, :dependent => :destroy
+  has_one  :episode, :dependent => :destroy
 
   scope :deleted, :conditions => ["deleted_at is not null"]
   scope :existing, :conditions => ["deleted_at is null"]
@@ -12,6 +12,7 @@ class Phile < ActiveRecord::Base
   before_validation :set_empty_fields_from_file
 
   validates_uniqueness_of :path
+  validates_uniqueness_of :inum, :scope => [:device], :allow_nil => true
 
   def set_empty_fields_from_file
     self.format ||= filename.split('.').last.downcase if filename.include?('.')
@@ -22,7 +23,7 @@ class Phile < ActiveRecord::Base
       stat = File.stat path
       Phile.new :path => path, :filename => File.basename(path), :file_modified_at => stat.mtime,
            :file_created_at => stat.ctime, :file_accessed_at => stat.atime, :size => stat.size,
-           :media_root => root
+           :media_root => root, :device => stat.dev, :inum => stat.ino
     end
 
     # see http://www.fileinfo.com/filetypes/video
@@ -61,6 +62,14 @@ class Phile < ActiveRecord::Base
     self.update_attributes! :deleted_at => Time.now
   end
 
+  def mark_processed!
+    self.update_attributes! :processed_at => Time.now
+  end
+
+  def process
+    mark_processed!
+  end
+
   def deleted?
     !! deleted_at
   end
@@ -79,37 +88,5 @@ class Phile < ActiveRecord::Base
     end
   end
 
-  def episode_spec
-    spec = EpisodeSpec.parse_filename self.filename
-    return spec if spec
-
-    if self.media_root and path.start_with?(self.media_root.path)
-      parts = path[self.media_root.path.size+1..-1].split('/')
-      season = 0
-      episode = 0
-
-      show = parts[0]
-
-      if match=self.filename.match(/(\d{3,4})[. _-]/)
-        num = match[1]
-        if num.size == 3
-          season = num[0..0]
-          episode = num[1..-1]
-        else
-          season = num[0..1]
-          episode = num[2..-1]
-        end
-      end
-
-      if (season == 0 || episode == 0) and parts.size > 2
-        show = show + " " + parts[1]
-      end
-      
-
-      return EpisodeSpec.new show, season, episode, self.filename
-    end
-
-    EpisodeSpec.new group, 0, 0, self.filename
-  end
 
 end

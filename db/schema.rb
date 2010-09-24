@@ -10,23 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100924170346) do
+ActiveRecord::Schema.define(:version => 20100924224224) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
     t.integer  "show_id"
     t.string   "season"
-    t.integer  "episode"
+    t.integer  "number"
     t.string   "title"
     t.datetime "aired_at"
     t.datetime "deleted_at"
     t.datetime "seen_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "unique_number"
+    t.string   "tvdb_id"
   end
 
   add_index "episodes", ["phile_id"], :name => "index_episodes_on_phile_id"
-  add_index "episodes", ["show_id", "season", "episode"], :name => "index_episodes_on_show_id_and_season_and_episode"
+  add_index "episodes", ["show_id", "season", "number"], :name => "index_episodes_on_show_id_and_season_and_episode"
 
   create_table "media_roots", :force => true do |t|
     t.string   "type",        :default => "EpisodeMediaRoot"
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20100924170346) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "inum"
+    t.string   "device"
   end
 
   add_index "philes", ["file_modified_at", "deleted_at", "seen_at"], :name => "index_philes_on_file_modified_at_and_deleted_at_and_seen_at"
@@ -120,6 +123,10 @@ ActiveRecord::Schema.define(:version => 20100924170346) do
     t.float    "confidence",     :default => 0.5
     t.string   "sortable_name"
     t.string   "tvdb_id"
+    t.integer  "runtime"
+    t.string   "network"
+    t.text     "overview"
+    t.string   "genre"
   end
 
   add_index "shows", ["sortable_name"], :name => "index_shows_on_sortable_name"

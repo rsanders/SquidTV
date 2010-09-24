@@ -1,5 +1,5 @@
 class EpisodeSpec
-  attr_reader :series, :season, :episode
+  attr_reader :series, :season, :episode, :title, :valid
 
   def self.parse_filename(name)
     name = name.gsub(/[<>()+=._ \t-]+/, ' ')
@@ -29,11 +29,12 @@ class EpisodeSpec
     series
   end
 
-  def initialize(series, season, episode, title = nil)
+  def initialize(series, season, episode, title = nil, valid = true)
     @series = EpisodeSpec.strip_series(series).titleize
     @season = season.to_i rescue @season
     @episode = episode.to_i rescue @episode
     @title = EpisodeSpec.strip_title title
+    @valid = valid
   end
 
   def title
