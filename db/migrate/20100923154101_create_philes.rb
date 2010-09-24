@@ -2,7 +2,7 @@ class CreatePhiles < ActiveRecord::Migration
   def self.up
     create_table :philes do |t|
 
-      t.string  :type, :default => "EpisodePhile"
+      t.string  :type, :default => "VideoPhile"
 
       t.integer    :media_root_id
       t.text       :path, :default => false

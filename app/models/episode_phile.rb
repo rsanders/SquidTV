@@ -1,2 +1,0 @@
-class EpisodePhile < Phile
-end

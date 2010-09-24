@@ -9,10 +9,11 @@ class MainController < ApplicationController
       high = @bars[idx]
       low = @bars[idx+1]
       logger.debug "selecting #{low} <= file <= #{high}"
-      @groups << [low, @files.select {|file| file.file_modified_at >= low and file.file_modified_at < high}]
+      @groups << [low, @files.select {|file| file.file_modified_at >= low and file.file_modified_at < high}.
+                       sort {|a,b| a.filename <=> b.filename }
+      ]
     end
     @groups.reject! {|pair| pair[1].size == 0}
-    logger.debug @groups.inspect
   end
 
 end

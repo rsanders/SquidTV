@@ -10,7 +10,7 @@ class MediaRoot < ActiveRecord::Base
   scope :active, :conditions => {:active => true} 
   scope :inactive, :conditions => {:active => false}
 
-
+  before_validation :load_filesystem_data
 
   validates_uniqueness_of :path
 
@@ -73,4 +73,12 @@ class MediaRoot < ActiveRecord::Base
   def contains_path?(path)
     path.start_with? self.path
   end
+
+  protected
+
+  # get real-world state about this
+  def load_filesystem_data
+    
+  end
+
 end

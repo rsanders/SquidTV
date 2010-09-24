@@ -32,6 +32,9 @@ gem 'newrelic_rpm', '2.13.1'
 # video processing
 gem 'streamio-ffmpeg'
 
+# tvdb api
+gem 'tvdb_party'
+
 # for statfs
 gem 'ffi'
 
@@ -46,4 +49,5 @@ gem 'ffi'
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'webrat'
+  gem 'ruby-prof'
 end

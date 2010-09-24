@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100923230837) do
+ActiveRecord::Schema.define(:version => 20100924170346) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
     t.string   "locked_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "local",       :default => true
   end
 
   add_index "media_roots", ["path"], :name => "index_media_roots_on_path", :unique => true
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
   add_index "movies", ["phile_id"], :name => "index_movies_on_phile_id"
 
   create_table "philes", :force => true do |t|
-    t.string   "type",             :default => "EpisodePhile"
+    t.string   "type",             :default => "VideoPhile"
     t.integer  "media_root_id"
     t.text     "path",             :default => "f"
     t.string   "filename",         :default => "f"
@@ -73,10 +74,12 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "inum"
   end
 
   add_index "philes", ["file_modified_at", "deleted_at", "seen_at"], :name => "index_philes_on_file_modified_at_and_deleted_at_and_seen_at"
   add_index "philes", ["filename"], :name => "index_philes_on_filename"
+  add_index "philes", ["inum"], :name => "index_philes_on_inum"
   add_index "philes", ["path"], :name => "index_philes_on_path", :unique => true
 
   create_table "seens", :force => true do |t|
@@ -94,6 +97,16 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
   add_index "seens", ["episode_id"], :name => "index_seens_on_episode_id"
   add_index "seens", ["phile_id"], :name => "index_seens_on_phile_id"
 
+  create_table "show_names", :force => true do |t|
+    t.integer "show_id"
+    t.string  "name"
+    t.string  "soundex"
+    t.string  "process",    :default => "exact"
+    t.float   "confidence", :default => 0.5
+  end
+
+  add_index "show_names", ["name"], :name => "index_show_names_on_name", :unique => true
+
   create_table "shows", :force => true do |t|
     t.string   "name"
     t.datetime "first_aired_at"
@@ -104,7 +117,13 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "confidence",     :default => 0.5
+    t.string   "sortable_name"
+    t.string   "tvdb_id"
   end
+
+  add_index "shows", ["sortable_name"], :name => "index_shows_on_sortable_name"
+  add_index "shows", ["tvdb_id"], :name => "index_shows_on_tvdb_id"
 
   create_table "users", :force => true do |t|
     t.string   "login"

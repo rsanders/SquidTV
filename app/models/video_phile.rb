@@ -1,0 +1,2 @@
+class VideoPhile < Phile
+end
