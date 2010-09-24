@@ -1,20 +1,14 @@
 require 'find'
 
-class Phile
-  include ActiveModel::Serializers::JSON
-  include ActiveModel::Serializers::Xml
-
-  include ActiveModel::Naming
-
+class Phile < ActiveRecord::Base
+  # XXX remove
   cattr_accessor :root
-  attr_accessor :name, :path, :modified_at, :created_at, :accessed_at
-
 
   class << self
     def from_path(path)
       stat = File.stat path
-      Phile.new :path => path, :name => File.basename(path), :modified_at => stat.mtime,
-           :created_at => stat.ctime, :accessed_at => stat.atime
+      Phile.new :path => path, :filename => File.basename(path), :file_modified_at => stat.mtime,
+           :file_created_at => stat.ctime, :file_accessed_at => stat.atime
     end
 
     # see http://www.fileinfo.com/filetypes/video
@@ -41,20 +35,7 @@ class Phile
         next
       end
 
-      list.sort {|a,b| b.modified_at <=> a.modified_at }
-    end
-  end
-
-  # attr_accessor :attributes
-  def initialize(attributes = {})
-    attributes.each do |key,value|
-      self.send "#{key.to_s}=", value 
-    end
-  end
-
-  def attributes
-    {}.tap do |res|
-      [:name, :path, :modified_at, :created_at, :accessed_at].map {|key| res[key.to_s] = self.send key }
+      list.sort {|a,b| b.file_modified_at <=> a.file_modified_at }
     end
   end
 
@@ -67,7 +48,7 @@ class Phile
   end
 
   def episode_spec
-    spec = EpisodeSpec.parse_filename self.name
+    spec = EpisodeSpec.parse_filename self.filename
     return spec if spec
 
     if Phile.root and path.start_with?(Phile.root)
@@ -80,7 +61,7 @@ class Phile
       else
         show = parts[0]
       end
-      if match=self.name.match(/(\d{3,4})[. _-]/)
+      if match=self.filename.match(/(\d{3,4})[. _-]/)
         num = match[1]
         if num.size == 3
           season = num[0..0]
@@ -91,10 +72,10 @@ class Phile
         end
       end
 
-      return EpisodeSpec.new show, season, episode, self.name
+      return EpisodeSpec.new show, season, episode, self.filename
     end
 
-    EpisodeSpec.new group, 0, 0, self.name
+    EpisodeSpec.new group, 0, 0, self.filename
   end
 
 end

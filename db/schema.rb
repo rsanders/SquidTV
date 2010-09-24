@@ -29,9 +29,13 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
   add_index "episodes", ["show_id", "season", "episode"], :name => "index_episodes_on_show_id_and_season_and_episode"
 
   create_table "media_roots", :force => true do |t|
-    t.string   "type",       :default => "tvshows"
-    t.text     "path",                              :null => false
-    t.boolean  "active",     :default => true
+    t.string   "type",        :default => "tvshows"
+    t.text     "path",                               :null => false
+    t.boolean  "active",      :default => true
+    t.datetime "scanned_at"
+    t.integer  "scan_period", :default => 300
+    t.datetime "locked_at"
+    t.string   "locked_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,16 +54,18 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
   add_index "movies", ["phile_id"], :name => "index_movies_on_phile_id"
 
   create_table "philes", :force => true do |t|
-    t.string   "type",            :default => "episode"
-    t.integer  "root_id"
-    t.text     "path",            :default => "f"
-    t.string   "filename",        :default => "f"
+    t.string   "type",             :default => "episode"
+    t.integer  "media_root_id"
+    t.text     "path",             :default => "f"
+    t.string   "filename",         :default => "f"
     t.string   "format"
     t.integer  "quality"
     t.boolean  "hdtv"
     t.integer  "size"
     t.float    "length"
     t.datetime "file_created_at"
+    t.datetime "file_modified_at"
+    t.datetime "file_accessed_at"
     t.datetime "seen_at"
     t.datetime "deleted_at"
     t.datetime "created_at"

@@ -4,7 +4,7 @@ class CreatePhiles < ActiveRecord::Migration
 
       t.string  :type, :default => "episode"
 
-      t.integer    :root_id
+      t.integer    :media_root_id
       t.text       :path, :default => false
       t.string     :filename, :default => false
 
@@ -16,6 +16,8 @@ class CreatePhiles < ActiveRecord::Migration
       t.float   :length
 
       t.datetime :file_created_at
+      t.datetime :file_modified_at
+      t.datetime :file_accessed_at
 
       t.datetime :seen_at
       t.datetime :deleted_at
