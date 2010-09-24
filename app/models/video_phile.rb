@@ -29,6 +29,9 @@ class VideoPhile < Phile
     true
   end
 
+  def show
+    episode && episode.show 
+  end
 
   def episode_spec
     spec = EpisodeSpec.parse_filename self.filename

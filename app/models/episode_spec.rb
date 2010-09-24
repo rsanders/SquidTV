@@ -1,32 +1,52 @@
 class EpisodeSpec
   attr_reader :series, :season, :episode, :title, :valid
 
-  def self.parse_filename(name)
-    name = name.gsub(/[<>()+=._ \t-]+/, ' ')
-    match = name.match(/^(.*)\s[sS](\d+)\s*[eE](\d+)(.*)\s([^ ]{2,5})$/) ||
-            name.match(/^(.*)\s(\d+)x(\d+)(.*)\s([^ ]{2,5})$/) ||
-            name.match(/^(.*)\s(\d)([012]\d)(.*)\s([^ ]{2,5})$/)
+  class << self
+    def split_episode_identifier(num)
+      if num.size == 3
+        season = num[0..0]
+        episode = num[1..-1]
+      else
+        season = num[0..1]
+        episode = num[2..-1]
+      end
+      [season, episode]
+    end
 
-    if match
-      EpisodeSpec.new match[1], match[2], match[3], match[4].strip
-    else
+    def parse_filename(name)
+      origname = name
+      name = name.gsub(/[<>()+=._ \t-]+/, ' ')
+      match = name.match(/^(.*)\s[sS](\d+)\s*[eE](\d+)(.*)\s([^ ]{2,5})$/) ||
+              name.match(/^(.*)\s(\d+)x(\d+)(.*)\s([^ ]{2,5})$/) ||
+              name.match(/^(.*)\s(\d)([012]\d)(.*)\s([^ ]{2,5})$/)
+
+      if match
+        return EpisodeSpec.new match[1], match[2], match[3], match[4].strip
+      end
+
+      match = origname.strip.match(/^(\d+)\s*[\s_-]\s*([^_-]+)(\s*[_-]\s*.*)?\.[a-zA-Z0-9]+$/)
+      if match
+        (season, number) = split_episode_identifier match[1]
+        return EpisodeSpec.new match[2], season, number, match[3]
+      end
+
       nil
     end
-  end
 
-  def self.strip_title(title)
-    return title unless title
+    def strip_title(title)
+      return title unless title
 
-    title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws) .*$/i, '').titleize
-  end
-
-  def self.strip_series(series)
-    (2005..2015).each do |year|
-      if series.end_with? " #{year}"
-        return series[0..-6]
-      end
+      title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws) .*$/i, '').titleize
     end
-    series
+
+    def strip_series(series)
+      (2005..2015).each do |year|
+        if series.end_with? " #{year}"
+          return series[0..-6]
+        end
+      end
+      series
+    end
   end
 
   def initialize(series, season, episode, title = nil, valid = true)

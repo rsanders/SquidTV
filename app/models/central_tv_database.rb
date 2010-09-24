@@ -48,4 +48,27 @@ class CentralTVDatabase
 
     "http://thetvdb.com/?tab=series&id=#{number}"
   end
+
+  # takes a Rails model object and adds good stuff to it
+  def add_episode_metadata(episode)
+    return false unless episode.valid_numbers?
+
+    show = episode.show
+    return false unless show
+
+    api_show = show.tvdb_id ? find_series_by_id(show.tvdb_id) : find_series_by_name(show.name)
+
+    return false unless api_show
+
+    api_episode = api_show.get_episode episode.season, episode.number
+
+    return false unless api_episode
+
+    episode.tvdb_id = api_episode.id
+    episode.aired_at = api_episode.air_date
+    episode.title = api_episode.name
+    episode.overview = api_episode.overview
+
+    true
+  end
 end

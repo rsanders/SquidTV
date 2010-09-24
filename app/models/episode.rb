@@ -7,4 +7,7 @@ class Episode < ActiveRecord::Base
                           :allow_nil => true, :allow_blank => true
   
 
+  def valid_numbers?
+    ! (season.blank? || season.to_s == "0" || number.blank? || number.to_s == "0")
+  end
 end

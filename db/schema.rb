@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100924224934) do
+ActiveRecord::Schema.define(:version => 20100924230550) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20100924224934) do
     t.datetime "updated_at"
     t.string   "unique_number"
     t.string   "tvdb_id"
+    t.text     "overview"
   end
 
   add_index "episodes", ["phile_id"], :name => "index_episodes_on_phile_id"

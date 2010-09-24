@@ -53,7 +53,8 @@ class Show < ActiveRecord::Base
   def add_episode(season, number, title = nil)
     epi = self.episodes.find_or_initialize_by_season_and_number :season => season, :number => number
     if epi.new_record?
-      epi.title = title
+      CentralTVDatabase.new.add_episode_metadata(epi)
+      epi.title ||= title
       epi.save!
     end
 
