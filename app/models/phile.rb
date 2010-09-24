@@ -7,6 +7,7 @@ class Phile < ActiveRecord::Base
   has_many :movies
 
   scope :deleted, :conditions => ["deleted_at is not null"]
+  scope :existing, :conditions => ["deleted_at is null"]
   
   before_validation :set_empty_fields_from_file
 

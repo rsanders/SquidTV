@@ -17,7 +17,7 @@ class EpisodeSpec
   def self.strip_title(title)
     return title unless title
 
-    title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws) .*$/i, '')
+    title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws) .*$/i, '').titleize
   end
 
   def self.strip_series(series)
@@ -30,7 +30,7 @@ class EpisodeSpec
   end
 
   def initialize(series, season, episode, title = nil)
-    @series = EpisodeSpec.strip_series series
+    @series = EpisodeSpec.strip_series(series).titleize
     @season = season.to_i rescue @season
     @episode = episode.to_i rescue @episode
     @title = EpisodeSpec.strip_title title
