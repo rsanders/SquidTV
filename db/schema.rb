@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
   add_index "movies", ["phile_id"], :name => "index_movies_on_phile_id"
 
   create_table "philes", :force => true do |t|
-    t.string   "type",             :default => "episode"
+    t.string   "type",             :default => "EpisodePhile"
     t.integer  "media_root_id"
     t.text     "path",             :default => "f"
     t.string   "filename",         :default => "f"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20100923230837) do
     t.datetime "updated_at"
   end
 
+  add_index "philes", ["file_modified_at", "deleted_at", "seen_at"], :name => "index_philes_on_file_modified_at_and_deleted_at_and_seen_at"
   add_index "philes", ["filename"], :name => "index_philes_on_filename"
   add_index "philes", ["path"], :name => "index_philes_on_path"
 

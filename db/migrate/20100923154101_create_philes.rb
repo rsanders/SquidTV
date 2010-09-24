@@ -2,7 +2,7 @@ class CreatePhiles < ActiveRecord::Migration
   def self.up
     create_table :philes do |t|
 
-      t.string  :type, :default => "episode"
+      t.string  :type, :default => "EpisodePhile"
 
       t.integer    :media_root_id
       t.text       :path, :default => false
@@ -27,6 +27,7 @@ class CreatePhiles < ActiveRecord::Migration
 
     add_index :philes, :path
     add_index :philes, :filename
+    add_index :philes, [:file_modified_at, :deleted_at, :seen_at]
   end
 
   def self.down

@@ -25,7 +25,7 @@
 -%>
 <tr>
   <% if episode %>
-      <td class="parsed" data-path="<%= file.path %>"><%= episode.series[0..20] %></td><td><%= episode.season %></td><td><%= episode.episode %></td>
+      <td class="parsed" data-path="<%= file.path %>"><%= episode.series[0..30] %></td><td><%= episode.season %></td><td><%= episode.episode %></td>
   <%- else -%>
       <td class="unparsed" colspan="3" data-path="<%= file.path %>"><%= file.name[0..20] %></td>
   <%- end -%>

@@ -1,14 +1,20 @@
 require 'find'
 
 class Phile < ActiveRecord::Base
-  # XXX remove
-  cattr_accessor :root
+  belongs_to :media_root
+
+  before_validation :set_empty_fields_from_file
+
+  def set_empty_fields_from_file
+
+  end
 
   class << self
-    def from_path(path)
+    def from_path(path, root = nil)
       stat = File.stat path
       Phile.new :path => path, :filename => File.basename(path), :file_modified_at => stat.mtime,
-           :file_created_at => stat.ctime, :file_accessed_at => stat.atime
+           :file_created_at => stat.ctime, :file_accessed_at => stat.atime, :size => stat.size,
+           :media_root => root
     end
 
     # see http://www.fileinfo.com/filetypes/video
@@ -20,10 +26,10 @@ class Phile < ActiveRecord::Base
     end
 
     def list_all(root = nil, options = {:sort => :newest})
-      root ||= self.root
+      root ||= self.media_root
 
       list = []
-      Find.find(root) do |path|
+      Find.find(root.path) do |path|
         base = File.basename(path)
         if base[0..0] == "."
           Find.prune if FileTest.directory?(path)
@@ -31,7 +37,7 @@ class Phile < ActiveRecord::Base
         end
 
         next if FileTest.symlink?(path) || FileTest.directory?(path) || ! is_movie?(base)
-        list << Phile.from_path(path)
+        list << Phile.from_path(path, root)
         next
       end
 
@@ -40,8 +46,8 @@ class Phile < ActiveRecord::Base
   end
 
   def group
-    if Phile.root and path.start_with? Phile.root
-      path[Phile.root.size+1..-1].gsub(/\/.*$/, '')      
+    if self.media_root and path.start_with? self.media_root.path
+      path[self.media_root.path.size+1..-1].gsub(/\/.*$/, '')
     else
       File.basename File.dirname(path)
     end
@@ -51,16 +57,13 @@ class Phile < ActiveRecord::Base
     spec = EpisodeSpec.parse_filename self.filename
     return spec if spec
 
-    if Phile.root and path.start_with?(Phile.root)
-      parts = path[Phile.root.size+1..-1].split('/')
+    if self.media_root and path.start_with?(self.media_root.path)
+      parts = path[self.media_root.path.size+1..-1].split('/')
       season = 0
       episode = 0
 
-      if parts.size > 2
-        show = parts[0] + " " + parts[1]
-      else
-        show = parts[0]
-      end
+      show = parts[0]
+
       if match=self.filename.match(/(\d{3,4})[. _-]/)
         num = match[1]
         if num.size == 3
@@ -72,10 +75,21 @@ class Phile < ActiveRecord::Base
         end
       end
 
+      if (season == 0 || episode == 0) and parts.size > 2
+        show = show + " " + parts[1]
+      end
+      
+
       return EpisodeSpec.new show, season, episode, self.filename
     end
 
     EpisodeSpec.new group, 0, 0, self.filename
   end
 
+end
+
+class EpisodePhile < Phile
+end
+
+class MovieFile < Phile
 end
