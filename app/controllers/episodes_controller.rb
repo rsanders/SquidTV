@@ -1,6 +1,11 @@
 class EpisodesController < ApplicationController
+  inherit_resources
 
-  def index
-    @episodes = Episode.unseen.where("created_at >= ?", 6.months.ago).order("aired_at desc")
+  belongs_to :show, :optional => true
+
+  protected
+
+  def collection
+    @episodes ||= end_of_association_chain.unseen.where("created_at >= ?", 6.months.ago).order("aired_at desc")
   end
 end

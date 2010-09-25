@@ -1,6 +1,6 @@
 
 <table id="episode-list">
-<%- groupify(@episodes, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
+<%- groupify(collection, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
     (group, episodes) = pair
 -%>
 <tr class="group"><td colspan="4">Aired less than <%= time_ago_in_words group %> ago</td></tr>
@@ -9,8 +9,8 @@
         show = episode.show
 -%>
 <tr>
-      <td class="parsed"><%= show.name[0..30] %></td><td><%= episode.season %></td><td><%= episode.number %></td>
-      <td class="title"><%= episode.title %></td>
+      <td class="parsed"><%= link_to show.name[0..30], show_episodes_path(show) %></td><td><%= episode.season %></td><td><%= episode.number %></td>
+      <td class="title"><%= link_to episode.title, episode_path(episode) %></td>
 </tr>
       <%- end -%>
   <%- end -%>

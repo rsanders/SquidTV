@@ -1,15 +1,21 @@
 
 <table class="list">
-<%- groupify(@files).each do |pair|
+<%- groupify(collection).each do |pair|
     (group, files) = pair
 -%>
 <tr class="group"><td colspan="3">Downloaded less than <%= time_ago_in_words group %> ago</td></tr>
 <%-
     files.each do |file|
         episode = file.episode_spec
+        showobj = file.show
+        episodeobj = file.episode
 -%>
 <tr>
-  <% if episode %>
+  <% if episodeobj %>
+      <td class="parsed" data-path="<%= file.path %>"><%= link_to showobj.name, showobj %></td>
+      <td><%= episodeobj.season %></td>
+      <td><%= link_to episodeobj.number, episodeobj %></td>
+  <% elsif episode %>
       <td class="parsed" data-path="<%= file.path %>"><%= episode.series[0..30] %></td><td><%= episode.season %></td><td><%= episode.episode %></td>
   <%- else -%>
       <td class="unparsed" colspan="3" data-path="<%= file.path %>"><%= file.name[0..20] %></td>

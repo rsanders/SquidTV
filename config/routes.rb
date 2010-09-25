@@ -21,14 +21,16 @@ Torvguide::Application.routes.draw do
 #  resources :users
 
   resources :media_roots
-  resources :files
+  resources :philes, :as => :files
 
   resources :shows do
     resources :show_names
     resources :episodes
   end
 
-  resources :episodes
+  resources :episodes do
+    resource :phile, :as => :file
+  end
 
   # Sample resource route with options:
   #   resources :products do

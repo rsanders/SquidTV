@@ -1,5 +1,10 @@
 class Show < ActiveRecord::Base
-  has_many :episodes, :dependent => :destroy
+  has_many :episodes, :dependent => :destroy do
+    def latest
+      order("season desc, number desc").limit(1).first
+    end
+  end
+
   has_many :show_names, :dependent => :destroy
 
   before_save :update_aliases
@@ -8,8 +13,6 @@ class Show < ActiveRecord::Base
   validates_uniqueness_of  :sortable_name
   validates_uniqueness_of  :tvdb_id, :allow_nil => true, :allow_blank => true
   validates_uniqueness_of  :url, :allow_nil => true, :allow_blank => true
-
-
 
   class << self
     def make_sortable_string(string)
