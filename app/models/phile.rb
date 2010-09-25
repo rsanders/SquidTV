@@ -7,6 +7,8 @@ class Phile < ActiveRecord::Base
   has_one  :episode, :dependent => :destroy
   has_one  :seen, :dependent => :destroy
 
+  has_one  :show, :through => :episode
+
   scope :deleted, :conditions => ["deleted_at is not null"]
   scope :existing, :conditions => ["deleted_at is null"]
 
