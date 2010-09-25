@@ -30,12 +30,13 @@ class ShowName < ActiveRecord::Base
     end
 
     def find_best_candidate(string)
-      find_all_candidates(string).sort {|a,b| b <=> a }.first
+      name = find_all_candidates(string).sort {|a,b| b.confidence <=> a.confidence }.first
+      name && name.show
     end
 
     def find_with_process_exact(string)
       find(:all, :conditions => ["process = ? and (LOWER(name) = ? or soundex = ?)", PROCESS_EXACT,
-                                 string, SearchUtils.soundex(string)])
+                                 string.downcase, SearchUtils.soundex(string)])
     end
 
     def find_with_process_soundex(string)
@@ -43,7 +44,8 @@ class ShowName < ActiveRecord::Base
     end
 
     def find_with_process_searchable(string)
-      find(:all, :conditions => ["process = ? and name = ?", PROCESS_SEARCHABLE, SearchUtils.searchable_string(string)])
+      find(:all, :conditions => ["process = ? and LOWER(name) = ?", PROCESS_SEARCHABLE,
+                                 SearchUtils.searchable_string(string).downcase])
     end
 
   end

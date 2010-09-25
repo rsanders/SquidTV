@@ -5,6 +5,7 @@ class Phile < ActiveRecord::Base
 
   has_one  :movie, :dependent => :destroy
   has_one  :episode, :dependent => :destroy
+  has_one  :seen, :dependent => :destroy
 
   scope :deleted, :conditions => ["deleted_at is not null"]
   scope :existing, :conditions => ["deleted_at is null"]
