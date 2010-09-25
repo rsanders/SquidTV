@@ -15,7 +15,7 @@
 
 </style>
 <table>
-<%- @groups.each do |pair|
+<%- groupify(@files).each do |pair|
     (group, files) = pair
 -%>
 <tr class="group"><td colspan="3">Downloaded less than <%= time_ago_in_words group %> ago</td></tr>

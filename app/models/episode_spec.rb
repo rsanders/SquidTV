@@ -24,6 +24,7 @@ class EpisodeSpec
         return EpisodeSpec.new match[1], match[2], match[3], match[4].strip
       end
 
+      # for "103 - Series Name.avi" style names
       match = origname.strip.match(/^(\d+)\s*[\s_-]\s*([^_-]+)(\s*[_-]\s*.*)?\.[a-zA-Z0-9]+$/)
       if match
         (season, number) = split_episode_identifier match[1]

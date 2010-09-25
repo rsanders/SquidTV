@@ -50,6 +50,10 @@ class Show < ActiveRecord::Base
     base.where("LOWER(name) = ?", string.downcase).count > 0
   end
 
+  def episode(season, number)
+    self.episodes.where("season = ? and number = ?", season, number).first
+  end
+
   def add_episode(season, number, title = nil)
     epi = self.episodes.find_or_initialize_by_season_and_number :season => season, :number => number
     if epi.new_record?
