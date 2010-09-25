@@ -1,9 +1,8 @@
 Metadata:
 
 - pull image links into episode/show
-- 
 
-Features:
+General:
 
 - browse into show
 - list by air date
@@ -14,6 +13,10 @@ Features:
 - replace "seriesout.sh" script - move files into place -- cannot rely on directory context for files!
 - manually filing philes that don't resolve
 - put show_name aliasing system into place (somewhat less important because of tvdb)
+
+Performance / concurrency:
+
+- fix locking of media root to use lock columns, not sql locks
 
 Filename Parsing:
 
