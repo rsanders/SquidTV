@@ -7,6 +7,8 @@ class Show < ActiveRecord::Base
 
   has_many :show_names, :dependent => :destroy
 
+
+
   before_save :update_aliases
 
   validates_uniqueness_of  :name
@@ -15,6 +17,16 @@ class Show < ActiveRecord::Base
   validates_uniqueness_of  :url, :allow_nil => true, :allow_blank => true
 
   class << self
+    def active_since(date)
+      ids = Show.find_by_sql("select s.id from shows as s
+join episodes as e on e.show_id = s.id
+group by s.id
+having max(aired_at) > '#{date}'
+order by max(aired_at) desc")
+      Show.where(:id => ids)
+    end
+
+
     def make_sortable_string(string)
       string = string.titleize
       ["A", "An", "The"].each do |word|

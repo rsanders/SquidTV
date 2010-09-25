@@ -24,6 +24,9 @@ Torvguide::Application.routes.draw do
   resources :philes, :as => :files
 
   resources :shows do
+    collection do
+      get 'recent'
+    end
     resources :show_names
     resources :episodes
   end
