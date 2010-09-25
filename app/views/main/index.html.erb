@@ -1,35 +1,4 @@
-<style type="text/css">
-  table { width: 100%; }
-  td.unparsed { font-style: italic; }
-  tr.group {
-      background-color: #2f4f4f;
-      color: white;
-  }
-  tr.group td {
-      padding-right: 40px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      text-align: right;
-      margin: 8px;
-  }
 
-</style>
-<table>
-<%- groupify(@files).each do |pair|
-    (group, files) = pair
--%>
-<tr class="group"><td colspan="3">Downloaded less than <%= time_ago_in_words group %> ago</td></tr>
-<%-
-    files.each do |file|
-        episode = file.episode_spec
--%>
-<tr>
-  <% if episode %>
-      <td class="parsed" data-path="<%= file.path %>"><%= episode.series[0..30] %></td><td><%= episode.season %></td><td><%= episode.episode %></td>
-  <%- else -%>
-      <td class="unparsed" colspan="3" data-path="<%= file.path %>"><%= file.name[0..20] %></td>
-  <%- end -%>
-</tr>
-      <%- end -%>
-  <%- end -%>
-</table>
+<p>Welcome to the TV list!<p>
+
+<p>Please choose Files, Shows, or Episodes from the menu above.</p>

@@ -38,6 +38,9 @@ gem 'tvdb_party'
 # for statfs
 gem 'ffi'
 
+# for admin
+gem 'admin_data'
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'

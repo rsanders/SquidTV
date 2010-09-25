@@ -1,21 +1,5 @@
-<style type="text/css">
-  table { width: 100%; }
-  td.unparsed { font-style: italic; }
-  tr.group {
-      background-color: #2f4f4f;
-      color: white;
-  }
-  tr.group td {
-      padding-right: 40px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      text-align: right;
-      margin: 8px;
-  }
-  td.title { text-align: right; }
 
-</style>
-<table>
+<table id="episode-list">
 <%- groupify(@episodes, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
     (group, episodes) = pair
 -%>
