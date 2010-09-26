@@ -14,8 +14,9 @@ class EpisodeSpec
     end
 
     def parse_filename(name)
+      # name = name.gsub(/\.[^.]+$/, '')
       origname = name
-      name = name.gsub(/[<>()+=._ \t-]+/, ' ')
+      name = name.gsub(/[<>\[\]()+=._ \t-]+/, ' ')
       match = name.match(/^(.*)\s[sS](\d+)\s*[eE](\d+)(.*)\s([^ ]{2,5})$/) ||
               name.match(/^(.*)\s(\d+)x(\d+)(.*)\s([^ ]{2,5})$/) ||
               name.match(/^(.*)\s(\d)([012]\d)(.*)\s([^ ]{2,5})$/)
@@ -37,7 +38,7 @@ class EpisodeSpec
     def strip_title(title)
       return title unless title
 
-      title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws) .*$/i, '').titleize
+      title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws|readnfo|dvdscr|ts|fqm|sys) .*$/i, '').strip.titleize
     end
 
     def strip_series(series)

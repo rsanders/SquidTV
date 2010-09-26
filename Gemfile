@@ -57,4 +57,14 @@ gem "meta_search"
 group :development, :test do
   gem 'webrat'
   gem 'ruby-prof'
+  gem 'rspec', ">= 2.0.0.beta.22"
+  gem 'rspec-rails', ">= 2.0.0.beta.22"
+end
+
+group :console do
+  gem 'wirble'
+  gem 'looksee'
+  gem 'bond'
+  gem 'hirb'
+  gem 'utility_belt'
 end
