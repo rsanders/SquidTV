@@ -38,7 +38,7 @@ class EpisodeSpec
     def strip_title(title)
       return title unless title
 
-      title.gsub(/ (hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws|readnfo|dvdscr|ts|fqm|sys) .*$/i, '').strip.titleize
+      title.gsub(/\b(hdtv|xvid|vtv|fqm|lol|xii|sdtv|720p|1080p|x264|bluray|blu-ray|ws|readnfo|dvdscr|ts|fqm|sys)\b.*$/i, '').strip.titleize
     end
 
     def strip_series(series)
