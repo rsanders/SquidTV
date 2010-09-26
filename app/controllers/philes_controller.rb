@@ -6,7 +6,7 @@ class PhilesController < ApplicationController
   protected
   
   def collection
-    @files ||= Phile.existing.where("file_modified_at >= ?", 6.months.ago).includes(:media_root)
+    @files ||= Phile.existing.where("file_modified_at >= ?", 6.months.ago).includes([:media_root, :episode])
   end
 
 end
