@@ -41,6 +41,10 @@ gem 'ffi'
 # for admin
 gem 'admin_data'
 
+# various hacks and plugins
+gem "meta_where"
+gem "meta_search"
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
