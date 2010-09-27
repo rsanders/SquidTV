@@ -1,5 +1,5 @@
 class Episode < ActiveRecord::Base
-  belongs_to :show
+  belongs_to :show, :counter_cache => true
   belongs_to :phile
   has_one    :seen, :dependent => :destroy
 
@@ -15,10 +15,12 @@ class Episode < ActiveRecord::Base
 
   def mark_seen!
     update_attributes :seen_at => Time.now.utc
+    show.update_cached_values
   end
 
   def mark_unseen!
     update_attributes :seen_at => nil
+    show.update_cached_values
   end
 
   def valid_numbers?

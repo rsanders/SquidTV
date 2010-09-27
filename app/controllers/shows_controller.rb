@@ -11,6 +11,13 @@ class ShowsController < ApplicationController
   protected
 
   def collection
-    @shows ||= end_of_association_chain.order("name asc")
+    if ! @shows
+      col = end_of_association_chain
+      unless params[:search] && params[:search][:meta_sort]
+        col = col.order("sortable_name asc")
+      end
+      @shows = col
+    end
+    @shows
   end
 end

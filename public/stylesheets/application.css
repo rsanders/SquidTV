@@ -18,3 +18,7 @@ tr.group td {
 }
 
 table#episode-list td.title { text-align: right; }
+
+.seen {
+    opacity: 0.3;
+}

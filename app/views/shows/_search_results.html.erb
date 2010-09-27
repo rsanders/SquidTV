@@ -1,13 +1,9 @@
 <table>
     <tbody>
 <%- search_results.each do |show|
-      next unless show.episodes.count > 0
+      next unless show.episodes.size > 0
 -%>
-<tr>
-  <td><%= link_to show.name, show %></td>
-  <td><%= link_to show.episodes.count, show_episodes_path(show) %></td>
-  <td><%= time_ago_in_words (show.episodes.latest.aired_at || show.episodes.latest.created_at) %></td>
-</tr>
+    <%= render show %>
 <%- end -%>
     </tbody>
 </table>

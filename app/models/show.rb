@@ -80,4 +80,12 @@ order by max(aired_at) desc")
 
     epi
   end
+
+  def update_cached_values
+    update_attributes :unwatched_episode_count => episodes.unseen.count,
+                      :episode_count => episodes.count,
+                      :latest_episode_at => (episodes.order("aired_at desc").limit(1).first.aired_at rescue nil),
+                      :latest_unwatched_episode_at => (episodes.unseen.order("aired_at desc").limit(1).first.aired_at rescue nil)
+
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100927132138) do
+ActiveRecord::Schema.define(:version => 20100927195327) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
@@ -138,13 +138,16 @@ ActiveRecord::Schema.define(:version => 20100927132138) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "confidence",     :default => 0.5
+    t.float    "confidence",                  :default => 0.5
     t.string   "sortable_name"
     t.string   "tvdb_id"
     t.integer  "runtime"
     t.string   "network"
     t.text     "overview"
     t.string   "genre"
+    t.integer  "unwatched_episode_count",     :default => 0
+    t.datetime "latest_episode_at"
+    t.datetime "latest_unwatched_episode_at"
   end
 
   add_index "shows", ["sortable_name"], :name => "index_shows_on_sortable_name"
