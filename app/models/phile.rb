@@ -93,6 +93,14 @@ class Phile < ActiveRecord::Base
 
   ## parsing
 
+  def relative_path
+    if self.media_root and path.start_with? self.media_root.path
+      path[self.media_root.path.size+1..-1]
+    else
+      path
+    end
+  end
+
   def group
     if self.media_root and path.start_with? self.media_root.path
       path[self.media_root.path.size+1..-1].gsub(/\/.*$/, '')
