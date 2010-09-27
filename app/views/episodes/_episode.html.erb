@@ -1,0 +1,8 @@
+<%-
+    show = episode.show
+-%>
+<tr id="episode_<%= episode.id %>" class="<%= episode.seen_at ? 'seen' : 'unseen' %>">
+      <td class="parsed"><%= link_to show.name[0..30], show_episodes_path(show) %></td><td><%= episode.season %></td><td><%= episode.number %></td>
+      <td class="action"><%= state_button(episode) %></td>
+      <td class="title"><%= link_to episode.title, episode_path(episode) %></td>
+</tr>

@@ -6,13 +6,8 @@
 <tr class="group"><td colspan="5">Aired less than <%= time_ago_in_words group %> ago</td></tr>
 <%-
     episodes.each do |episode|
-        show = episode.show
 -%>
-<tr id="episode_<%= episode.id %>">
-      <td class="parsed"><%= link_to show.name[0..30], show_episodes_path(show) %></td><td><%= episode.season %></td><td><%= episode.number %></td>
-      <td class="action"><%= seen_button(episode) %></td>
-      <td class="title"><%= link_to episode.title, episode_path(episode) %></td>
-</tr>
+          <%= render episode %>
       <%- end -%>
   <%- end -%>
 </table>

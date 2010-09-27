@@ -11,18 +11,32 @@ class EpisodesController < ApplicationController
 
   # include MetaSearchable
 
-  def seen
+  def watch
     resource.mark_seen!
     respond_to do |fmt|
       fmt.html { redirect_to :episodes }
       fmt.json { head :code => 200 }
       fmt.js {
           render :update do |page|
-            page["episode_#{resource.id}"].hide
+            page["episode_#{resource.id}"].replace :partial => "episode", :object => resource
           end
       }
     end
   end
+
+  def unwatch
+    resource.mark_unseen!
+    respond_to do |fmt|
+      fmt.html { redirect_to :episodes }
+      fmt.json { head :code => 200 }
+      fmt.js {
+          render :update do |page|
+            page["episode_#{resource.id}"].replace :partial => "episode", :object => resource
+          end
+      }
+    end
+  end
+
 
   protected
 

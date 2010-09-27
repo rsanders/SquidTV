@@ -33,7 +33,15 @@ module ApplicationHelper
     groups.reject {|pair| pair[1].size == 0}
   end
 
-  def seen_button(epi)
-    link_to "Mark Seen", seen_episode_path(epi), :remote => true, :method => :post
+  def watch_button(epi)
+    link_to "Watch", watch_episode_path(epi), :remote => true, :method => :post
+  end
+
+  def unwatch_button(epi)
+    link_to "Unwatch", unwatch_episode_path(epi), :remote => true, :method => :post
+  end
+
+  def state_button(epi)
+    epi.seen_at ? unwatch_button(epi) : watch_button(epi)
   end
 end

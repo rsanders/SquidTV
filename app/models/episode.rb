@@ -14,7 +14,11 @@ class Episode < ActiveRecord::Base
   scope :recent, :conditions => ["aired_at >= ?", 3.months.ago]
 
   def mark_seen!
-    self.update_attributes :seen_at => Time.now.utc
+    update_attributes :seen_at => Time.now.utc
+  end
+
+  def mark_unseen!
+    update_attributes :seen_at => nil
   end
 
   def valid_numbers?

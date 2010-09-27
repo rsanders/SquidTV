@@ -39,7 +39,8 @@ Torvguide::Application.routes.draw do
   resources :episodes do
     resource :phile, :as => :file
     member do
-      post 'seen'
+      post :watch
+      post :unwatch
     end
   end
 
