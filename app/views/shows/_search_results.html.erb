@@ -1,9 +1,7 @@
-<table>
-    <tbody>
+
 <%- search_results.each do |show|
       next unless show.episodes.size > 0
 -%>
     <%= render show %>
 <%- end -%>
-    </tbody>
-</table>
+
