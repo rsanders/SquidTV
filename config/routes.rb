@@ -21,7 +21,11 @@ Torvguide::Application.routes.draw do
 #  resources :users
 
   resources :media_roots
-  resources :philes, :as => :files
+  resources :philes, :as => :files do
+    resource :episode
+    resource :movie
+    resource :show
+  end
 
   resources :shows do
     collection do
@@ -29,10 +33,14 @@ Torvguide::Application.routes.draw do
     end
     resources :show_names
     resources :episodes
+    resources :philes
   end
 
   resources :episodes do
     resource :phile, :as => :file
+    member do
+      post 'seen'
+    end
   end
 
   # Sample resource route with options:

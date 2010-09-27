@@ -6,8 +6,9 @@ class Show < ActiveRecord::Base
   end
 
   has_many :show_names, :dependent => :destroy
+  has_many :philes, :through => :episodes
 
-
+  scope :recent, lambda { active_since(3.months.ago) }
 
   before_save :update_aliases
 

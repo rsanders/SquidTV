@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100924230550) do
+ActiveRecord::Schema.define(:version => 20100927132138) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
@@ -30,6 +30,22 @@ ActiveRecord::Schema.define(:version => 20100924230550) do
 
   add_index "episodes", ["phile_id"], :name => "index_episodes_on_phile_id"
   add_index "episodes", ["show_id", "season", "number"], :name => "index_episodes_on_show_id_and_season_and_episode"
+
+  create_table "incoming_paths", :force => true do |t|
+    t.string   "source_type",       :default => "torrent"
+    t.text     "path",                                     :null => false
+    t.boolean  "active",            :default => true
+    t.datetime "scanned_at"
+    t.integer  "scan_period",       :default => 300
+    t.datetime "locked_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "contains_episodes", :default => true
+    t.boolean  "contains_movies",   :default => true
+    t.boolean  "contains_music",    :default => false
+    t.boolean  "local",             :default => true
+  end
 
   create_table "media_roots", :force => true do |t|
     t.string   "type",        :default => "EpisodeMediaRoot"

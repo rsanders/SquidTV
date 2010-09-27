@@ -32,4 +32,8 @@ module ApplicationHelper
     end
     groups.reject {|pair| pair[1].size == 0}
   end
+
+  def seen_button(epi)
+    link_to "Mark Seen", seen_episode_path(epi), :remote => true, :method => :post
+  end
 end

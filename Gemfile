@@ -39,7 +39,7 @@ gem 'tvdb_party'
 gem 'ffi'
 
 # for admin
-gem 'admin_data'
+# gem 'admin_data'
 
 # various hacks and plugins
 gem "meta_where"
@@ -59,6 +59,8 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'rspec', ">= 2.0.0.beta.22"
   gem 'rspec-rails', ">= 2.0.0.beta.22"
+  # gem 'rails-footnotes'
+  # gem 'fakefs'
 end
 
 group :console do

@@ -1,9 +1,12 @@
+require_dependency 'meta_searchable'
+
 class ShowsController < ApplicationController
   inherit_resources
+  respond_to :html, :json, :js, :xml
 
-  def recent
-    @shows ||= end_of_association_chain.active_since(3.months.ago).order("name asc")
-  end
+  has_scope :recent
+
+  include MetaSearchable
 
   protected
 

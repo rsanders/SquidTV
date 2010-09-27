@@ -1,8 +1,10 @@
 class PhilesController < ApplicationController
   inherit_resources
+  respond_to :html, :json, :js, :xml
 
   belongs_to :episode, :singleton => true, :optional => true
-  
+  belongs_to :show, :optional => true
+
   protected
   
   def collection

@@ -9,7 +9,13 @@ class Episode < ActiveRecord::Base
   
 
   # XXX - temp hack until we figure out seen state
-  scope :unseen, :conditions => "1=1"
+  scope :unseen, :conditions => "seen_at is null"
+
+  scope :recent, :conditions => ["aired_at >= ?", 3.months.ago]
+
+  def mark_seen!
+    self.update_attributes :seen_at => Time.now.utc
+  end
 
   def valid_numbers?
     ! (season.blank? || season.to_s == "0" || number.blank? || number.to_s == "0")
