@@ -21,7 +21,7 @@ Torvguide::Application.routes.draw do
 #  resources :users
 
   resources :media_roots
-  resources :philes, :as => :files do
+  resources :philes, :path => "files" do
     resource :episode
     resource :movie
     resource :show
@@ -33,11 +33,11 @@ Torvguide::Application.routes.draw do
     end
     resources :show_names
     resources :episodes
-    resources :philes
+    resources :philes, :path => "files"
   end
 
   resources :episodes do
-    resource :phile, :as => :file
+    resource :phile, :path => "file"
     member do
       post :watch
       post :unwatch
