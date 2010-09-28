@@ -6,8 +6,16 @@
     <!-- etc... -->
     <%= f.submit %>
   <% end %>
-  <%= sort_link @search, :sortable_name, "Name" %>
-  <%= sort_link @search, :first_aired_at %>
-  <%= sort_link @search, :episode_count %>
 
+  <table>
+    <thead>
+    <tr>
+      <th><%= sort_link @search, :sortable_name, "Name" %></th>
+      <th><%= sort_link @search, :unwatched_episode_count %></th>
+      <th><%= sort_link @search, :latest_unwatched_episode_at %></th>
+    </tr>
+    </thead>
+      <tbody>
 <%= render :partial => "search_results", :locals => {:search_results => collection} %>
+      </tbody>
+  </table>
