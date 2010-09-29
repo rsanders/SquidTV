@@ -85,7 +85,7 @@ order by max(aired_at) desc")
     latest = episodes.order("aired_at desc").limit(1).first
     latest_unwatched = episodes.unseen.order("aired_at desc").limit(1).first
     update_attributes :unwatched_episode_count => episodes.unseen.count,
-                      :episode_count => episodes.count,
+                      :episodes_count => episodes.count,
                       :latest_episode_at => latest ? (latest.aired_at || latest.created_at) : nil,
                       :latest_unwatched_episode_at => latest_unwatched ? (latest_unwatched.aired_at || latest_unwatched.created_at) : nil
 
