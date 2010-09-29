@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100927195327) do
+ActiveRecord::Schema.define(:version => 20100929143205) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "phile_id"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(:version => 20100927195327) do
     t.datetime "first_aired_at"
     t.datetime "ended_at"
     t.integer  "season_count"
-    t.integer  "episode_count"
+    t.integer  "episodes_count"
     t.text     "show_path"
     t.string   "url"
     t.datetime "created_at"

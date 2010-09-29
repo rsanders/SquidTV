@@ -1,4 +1,11 @@
-  <%= form_for @search, :url => shows_path, :html => {:method => :get} do |f| %>
+<ul class="horizontal_menu">
+  <li><%= link_to "All Shows", shows_path %></li>
+  <li><%= link_to "Recent Shows", shows_path(:recent => true) %></li>
+</ul>
+
+<hr>
+
+<%= form_for @search, :url => shows_path, :html => {:method => :get} do |f| %>
     <%= f.label :name_contains %>
     <%= f.text_field :name_contains %><br />
     <%# f.label :comments_created_at_greater_than, 'With comments after' %>
