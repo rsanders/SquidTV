@@ -14,7 +14,9 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'capistrano'
 
 # To use debugger
-gem 'ruby-debug'
+unless defined?(JRuby)
+  gem 'ruby-debug'
+end
 
 # inherited resources
 gem 'inherited_resources', '1.1.2'
@@ -56,7 +58,9 @@ gem "meta_search"
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'webrat'
-  gem 'ruby-prof'
+  unless defined?(JRuby) 
+    gem 'ruby-prof'
+  end
   gem 'rspec', ">= 2.0.0.beta.22"
   gem 'rspec-rails', ">= 2.0.0.beta.22"
   # gem 'rails-footnotes'
@@ -65,8 +69,10 @@ end
 
 group :console do
   gem 'wirble'
-  gem 'looksee'
   gem 'bond'
   gem 'hirb'
   gem 'utility_belt'
+  unless defined?(JRuby) 
+    gem 'looksee'
+  end
 end
