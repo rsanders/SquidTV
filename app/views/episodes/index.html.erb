@@ -10,10 +10,6 @@
     (group, episodes) = pair
 -%>
 <tr class="group"><td colspan="5">Aired less than <%= time_ago_in_words group %> ago</td></tr>
-<%-
-    episodes.each do |episode|
--%>
-          <%= render episode %>
-      <%- end -%>
+          <%= render :partial => "episode", :collection => episodes %>
   <%- end -%>
 </table>

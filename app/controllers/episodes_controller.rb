@@ -43,6 +43,9 @@ class EpisodesController < ApplicationController
   def collection
     base = end_of_association_chain
     base = base.unseen unless params[:seen] || params[:all]
-    @episodes ||= base.where("created_at >= ?", 6.months.ago).order("aired_at desc").includes([:show, :phile])
+    if ! @show
+      base = base.where("aired_at >= ?", 6.months.ago)
+    end
+    @episodes ||= base.order("aired_at desc").includes([:show, :phile])
   end
 end
