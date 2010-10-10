@@ -5,18 +5,31 @@ Metadata:
 General:
 
 - browse into show
-- list by air date
 - list by download date
 - detect which episodes have been seen
-- mark seen
 - mark deleted and/or delete
 - replace "seriesout.sh" script - move files into place -- cannot rely on directory context for files!
 - manually filing philes that don't resolve
 - put show_name aliasing system into place (somewhat less important because of tvdb)
+- page showing "next up" - first unseen episode for each show
+- initial show "subscription" model to guide parsing - crib some of this data from the tvshows app?
+
+Testing
+
+- empty file directory tree
+- episode_spec unit test
+- processing unit test
+
 
 Performance / concurrency:
 
 - fix locking of media root to use lock columns, not sql locks
+
+Processing:
+
+- Multiple philes per episode:
+    - House	House.S07E01.720p.HDTV.X264-DIMENSION.mkv	7	1
+    - House	House.S07E01.HDTV.XviD-LOL.avi	7	1
 
 Filename Parsing:
 
@@ -30,7 +43,11 @@ Filename Parsing:
 - weird series names:
    tv/hawaii50/Hawaii.Five-0.2010.S01E01.HDTV.XviD-LOL.[VTV].avi
 
-   
+- date episode #s:
+    The.Daily.Show.2010.09.23.King.Abdullah.II.HDTV.XviD-FQM.[VTV].avi
+    
+
+    
 Current failures:
 
 > Phile.unresolved.map &:path
