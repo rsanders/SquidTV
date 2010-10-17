@@ -2,14 +2,25 @@ require_dependency 'meta_searchable'
 
 class EpisodesController < ApplicationController
   inherit_resources
-  respond_to :html, :json, :js, :xml
+  # respond_to :html, :json, :js, :xml, :mobile
   
   belongs_to :show, :optional => true
   # belongs_to :phile, :singleton => true, :optional => true
 
   has_scope :recent
 
+  before_filter { @title = "Episodes" }
+
   # include MetaSearchable
+
+#  def index
+#    collection
+##    respond_to do |fmt|
+##      format.html { render }
+##      format.mobile { render }
+##      format.json { render :json => collection }
+##    end
+#  end
 
   def watch
     resource.mark_seen!

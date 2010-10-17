@@ -3,11 +3,23 @@ class ApplicationController < ActionController::Base
 
   has_mobile_fu
 
+  before_filter  :set_format_for_jqmobile
+
+  ##
+  ## XXX: this breaks XHR for other content types, so it's just a hack ATM
+  ##
+  def set_format_for_jqmobile
+    if request.xhr? and is_mobile_device?
+      request.format = :mobile
+    end
+  end
+
   def is_device_with_cookie?(device)
+    variant = cookies[:site_variant] || params[:variant]
     puts "with cookie called!"
-    if cookies[:site_variant] == "normal"
+    if variant == "normal"
       false
-    elsif cookies[:site_variant] == device
+    elsif variant == device
       true
     else
       is_device_without_cookie?(device)
@@ -16,9 +28,11 @@ class ApplicationController < ActionController::Base
 
   def is_mobile_device_with_cookie?
     puts "imb with cookie called!"
-    if cookies[:site_variant] == "normal"
+    variant = cookies[:site_variant] || params[:variant]
+
+    if variant == "normal"
       false
-    elsif ! cookies[:site_variant].empty?
+    elsif variant && ! variant.empty?
       true
     else
       is_mobile_device_without_cookie?
