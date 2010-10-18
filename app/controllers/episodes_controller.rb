@@ -2,7 +2,7 @@ require_dependency 'meta_searchable'
 
 class EpisodesController < ApplicationController
   inherit_resources
-  # respond_to :html, :json, :js, :xml, :mobile
+  respond_to :html, :json, :js, :xml, :mobile
   
   belongs_to :show, :optional => true
   # belongs_to :phile, :singleton => true, :optional => true
@@ -15,11 +15,12 @@ class EpisodesController < ApplicationController
 
 #  def index
 #    collection
-##    respond_to do |fmt|
-##      format.html { render }
-##      format.mobile { render }
-##      format.json { render :json => collection }
-##    end
+#    respond_to do |fmt|
+#      fmt.mobile { render }
+#      fmt.xml { render :xml => collection }
+#      fmt.json { render :json => collection.to_json(:include => [:show]) }
+#      fmt.html
+#    end
 #  end
 
   def watch

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   has_mobile_fu
 
-  before_filter  :set_format_for_jqmobile
+  # before_filter  :set_format_for_jqmobile
 
   ##
   ## XXX: this breaks XHR for other content types, so it's just a hack ATM

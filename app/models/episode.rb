@@ -26,4 +26,12 @@ class Episode < ActiveRecord::Base
   def valid_numbers?
     ! (season.blank? || season.to_s == "0" || number.blank? || number.to_s == "0")
   end
+
+  def show_name
+    show.name
+  end
+
+  def as_json(options={})
+    serializable_hash( :methods => [:show_name], :include =>[:show])
+  end
 end
