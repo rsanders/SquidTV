@@ -1,0 +1,11 @@
+<%-
+    episode = resource
+    show = episode.show
+-%>
+<h1><%= link_to show.name[0..30], show_episodes_path(show) %></h1>
+<p>Season <%= episode.season %>, Episode <%= episode.number %></p>
+<p><strong><%= episode.title %></strong></p>
+<h3>Overview</h3>
+<p><%= episode.overview %></p>
+
+

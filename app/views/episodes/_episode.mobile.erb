@@ -3,7 +3,7 @@
 -%>
 <li>
                 <h3> <%= link_to show.name[0..30], show_episodes_path(show) %></h3>
-                <p><strong><%= link_to_if false, episode.title, episode_path(episode) %></strong></p>
+                <p><strong><%= link_to_if true, episode.title, episode_path(episode) %></strong></p>
                 <p><%= episode.overview %></p>
                 <p class="ui-li-aside"> <%= episode.season %> - <%= episode.number %></p>
 
