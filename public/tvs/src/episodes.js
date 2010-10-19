@@ -2,7 +2,13 @@
 
 Ext.regModel('Episode', {
     fields: ['id', 'title', 'show_name', {name: 'show', type: 'Show'},
-        'aired_at', 'season', 'number', 'overview', 'time_category']
+        'aired_at', 'season', 'number', 'overview', 'time_category'],
+
+    belongsTo: 'Show',
+
+    displayName: function() {
+        return this.get('show_name') + " " + this.get('season') + ' ' + this.get('number');
+    }
 });
 
 torv.EpisodeStore = new Ext.data.Store({
@@ -45,4 +51,11 @@ torv.EpisodeList = new Ext.List ({
     grouped: true,
     iconCls: 'user',
     indexBar: false
+});
+
+torv.EpisodeList.on('itemswipe', function(list, idx, el, e) {
+    var ds = list.getStore(),
+        r  = ds.getAt(idx);
+    alert("Swiped  " + r.displayName() + ' ' + r.get('overview'));
+    list.clearSelections();
 });

@@ -9,7 +9,9 @@
 Ext.regModel('Show', {
     fields: ['id', 'name', 'created_at', 'unwatched_episode_count', 'episodes_count', 'url',
         'latest_unwatched_episode_at', 'first_aired_at', 'runtime', 'latest_episode_at', 'tvdb_id',
-        'season_count', 'genre', 'overview', 'sortable_name']
+        'season_count', 'genre', 'overview', 'sortable_name'],
+
+    hasMany: 'Episode'
 });
 
 torv.ShowStore = new Ext.data.Store({
@@ -57,7 +59,7 @@ torv.ShowList = new Ext.List ({
 //    }
 });
 
-torv.ShowList.on('itemtap', function(list, idx, el, e, detailCard) {
+torv.ShowList.on('itemtap', function(list, idx, el, e) {
     var ds = list.getStore(),
         r  = ds.getAt(idx);
     alert("Tapped on leaf! " + r.get('name') );
