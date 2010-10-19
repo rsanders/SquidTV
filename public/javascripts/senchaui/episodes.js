@@ -63,7 +63,7 @@ torv.Main.initEpisodeList = function() {
         actions: new Ext.ActionSheet({
                         items: [{
                             text: 'Watch',
-                            ui: 'decline',
+                            ui: 'confirm-round',
                             handler : function() {
                                 var     args = torv.EpisodeList.actions.args,
                                         episode = args.episode;
@@ -74,7 +74,7 @@ torv.Main.initEpisodeList = function() {
                             }
                         },{
                             text : 'Cancel',
-                            ui: 'confirm',
+                            ui: 'decline',
                             handler : function(){
                                 torv.EpisodeList.actions.hide();
                             }
@@ -85,19 +85,6 @@ torv.Main.initEpisodeList = function() {
 
     torv.EpisodeList.on('itemswipe', function(list, idx, el, e) {
         list.swipeAction(list, idx, el);
-    });
-
-    torv.EpisodeList.on('containertap', function(list, e) {
-        var elapsed = 9999999;
-        if (this.lastTap) {
-            elapsed = e.time - this.lastTap;
-            console.log("elapsed: " + elapsed);
-        }
-        this.lastTap = e.time;
-        if (e.pageY < 30 && elapsed < 500) {
-            alert("Tap to top: " + elapsed);
-            this.lastTap = null;
-        }
     });
 
     // XXX: another weird hack dueto ignorance - we wait until after layout to add a
