@@ -4,15 +4,15 @@ Ext.regModel('Show', {
 
 Ext.regModel('Episode', {
     fields: ['id', 'title', 'show_name', {name: 'show', type: 'Show'},
-        'aired_at', 'season', 'number', 'overview']
+        'aired_at', 'season', 'number', 'overview', 'time_category']
 });
 
 torv.EpisodeStore = new Ext.data.Store({
     model: 'Episode',
     sorters: 'id',
-//    getGroupString : function(record) {
-//        return record.get('show_id')[0];
-//    },
+    getGroupString : function(record) {
+        return record.get('time_category');
+    },
 
     // store configs
     autoLoad: true,
@@ -31,9 +31,6 @@ torv.EpisodeStore = new Ext.data.Store({
 //            idProperty: 'id'
 //        }
     }
-
-    //alternatively, a Ext.data.Model name can be given (see Ext.data.Store for an example)
-    // fields: ['id', 'title'] /*, {name:'size', type: 'float'}, {name:'lastmod', type:'date'}] */
 });
 
 
@@ -43,9 +40,14 @@ torv.EpisodeList = new Ext.List ({
     height: 500,
     xtype: 'list',
     store: torv.EpisodeStore,
-    tpl: '<tpl for="."><div class="contact"><strong>{id}</strong> {title}</div></tpl>',
-    itemSelector: 'div.contact',
+    tpl: '<tpl for="."><div class="episode"><h3>{show_name}</h3>' +
+            '<span class="episode_number">{season} - {number}</span>' +
+            '<h4 class="title">{title}</h4>' +
+            '<p class="overview">{overview}</p>' +
+            '</div></tpl>',
+    itemSelector: 'div.episode',
     singleSelect: true,
-    grouped: false,
-    indexBar: true
+    grouped: true,
+    iconCls: 'user',
+    indexBar: false
 });
