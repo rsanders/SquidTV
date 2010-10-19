@@ -40,7 +40,7 @@ gem 'tvdb_party'
 # for statfs
 gem 'ffi'
 
-gem 'rack-offline'
+gem 'rack-offline', :path => 'vendor/gems/rack-offline'
 
 # for admin
 # gem 'admin_data'
