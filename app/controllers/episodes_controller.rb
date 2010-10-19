@@ -7,6 +7,8 @@ class EpisodesController < ApplicationController
   belongs_to :show, :optional => true
   # belongs_to :phile, :singleton => true, :optional => true
 
+
+
   has_scope :recent
 
   before_filter { @title = "Episodes" }
@@ -57,6 +59,11 @@ class EpisodesController < ApplicationController
     base = base.unseen unless params[:seen] || params[:all]
     if ! @show
       base = base.where("aired_at >= ?", 6.months.ago)
+    end
+
+    # XXX - hack to work around jQuery Mobile crashes
+    if in_mobile_view?
+      base = base.limit(40)
     end
     @episodes ||= base.order("aired_at desc").includes([:show, :phile])
   end
