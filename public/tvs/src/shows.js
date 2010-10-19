@@ -19,6 +19,9 @@ torv.ShowStore = new Ext.data.Store({
     autoLoad: true,
     autoDestroy: true,
     storeId: 'showStore',
+    getGroupString : function(record) {
+        return record.get('name').substring(0,1);
+    },
 
     proxy: {
         type: 'ajax',
@@ -42,9 +45,9 @@ torv.ShowList = new Ext.List ({
             '</div></tpl>',
     itemSelector: 'div.show',
     singleSelect: true,
-    grouped: false,
+    grouped: true,
     iconCls: 'favorites',
-    indexBar: true,
+    indexBar: true
 
 //    disclosure: {
 //        scope: 'test',
