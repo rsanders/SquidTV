@@ -124,16 +124,17 @@ torv.Main.initEpisodeList = function() {
 
     torv.EpisodeList.on('afterlayout', function() {
         if (!this.addedDtapHandler) {
-            Ext.EventManager.addListener(torv.EpisodeList.id, 'doubletap', function(e) {
+            Ext.EventManager.addListener(this.id, 'doubletap', function(e) {
+                var list = this;
                 if (e.pageY < 30) {
                     console.log("scrolling");
                     // fixes bug where old header stayed pinned to top
-                    if (torv.EpisodeList.header) {
-                        torv.EpisodeList.header.hide();
+                    if (list.header) {
+                        list.header.hide();
                     }
-                    torv.EpisodeList.scroller.scrollTo(0, 500);
+                    list.scroller.scrollTo(0, 500);
                 }
-            });
+            }, this);
             this.addedDtapHandler = true;
         }
     });
