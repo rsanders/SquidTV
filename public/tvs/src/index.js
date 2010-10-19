@@ -13,10 +13,10 @@ torv.Main = {
                 }
             },
             ui: 'light',
-            animation: {
-                type: 'cardslide',
-                cover: true
-            },
+//            animation: {
+//                type: 'cardslide',
+//                cover: true
+//            },
 
             defaults: {
                 scroll: 'vertical'

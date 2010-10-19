@@ -36,6 +36,7 @@ torv.EpisodeList = new Ext.List ({
     height: 500,
     xtype: 'list',
     store: torv.EpisodeStore,
+    loadingText: 'Loading...',
     tpl: '<tpl for="."><div class="episode"><h3>{show_name}</h3>' +
             '<span class="episode_number">{season} - {number}</span>' +
             '<h4 class="title">{title}</h4>' +
