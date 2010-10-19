@@ -3,13 +3,25 @@ class ApplicationController < ActionController::Base
 
   has_mobile_fu
 
-  # before_filter  :set_format_for_jqmobile
+  before_filter  :set_format_for_jqmobile
 
   ##
-  ## XXX: this breaks XHR for other content types, so it's just a hack ATM
+  ## XXX: this breaks XHR for other content types, so it's just a hack ATM#
+  ##
+  ## jQuery Mobile makes XHR requests for content snippets, but leaves
+  ## the Accept header at */* and does not explicitly set any vars or
+  ## formats.  This confuses our controllers.
+  ##
+  ## To use this:
+  ## Normal links will have no specific format in the params. Nor will
+  ## inter-page links auto-XHR-ified by jQuery Mobile.  This is most
+  ## convenient.  But application XHR requests *should* include a specific
+  ## .js or .json or .xml or .csv extension or whatever, to bypass this
+  ## workaround.
+  ##
   ##
   def set_format_for_jqmobile
-    if request.xhr? and is_mobile_device?
+    if request.xhr? and is_mobile_device? and ! ["js", "json", "xml", "csv"].include?(params[:format].to_s)
       request.format = :mobile
     end
   end
