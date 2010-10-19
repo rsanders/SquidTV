@@ -10,34 +10,13 @@
 
     <!-- <link rel="stylesheet" href="../sencha/css/sencha-touch.css" type="text/css"> -->
     <link rel="stylesheet" href="../sencha/css/apple.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/senchacustom.css" type="text/css">
 
     <script type="text/javascript" src="../javascripts/sencha/ext-touch.js"></script>
 
     <script type="text/javascript" src="src/index.js"></script>
     <script type="text/javascript" src="src/shows.js"></script>
     <script type="text/javascript" src="src/episodes.js"></script>
-
-	<style>
-	    .card1, .card2, .card3 {
-	        background-color: #376daa;
-	        text-align: center;
-	        color: #204167;
-	        text-shadow: #3F80CA 0 1px 0;
-	        font-size: 72px;
-            padding-top: 100px;
-	    }
-        span.episode_number {
-            position: absolute;
-            top: 10px;
-            right: 2em;
-        }
-        .episode p.overview {
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            /* padding-right: 4em; */
-        }
-	</style>
 
 </head>
 <body>
@@ -46,8 +25,10 @@
     <tpl for=".">
         <div class="episode"><h3>{show_name}</h3>
             <span class="episode_number">{season} - {number}</span>
-            <h4 class="title">{title}</h4>
-            <p class="overview">{overview}</p>
+            <div class="details">
+                <span class="title">{title}</span>
+                <span class="overview">{overview}</span>
+            </div>
         </div>
     </tpl>
 </textarea>
