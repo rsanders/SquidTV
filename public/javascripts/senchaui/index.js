@@ -56,7 +56,8 @@ Ext.setup({
 
 if (window.applicationCache) {
     window.applicationCache.addEventListener('updateready', function() {
-        alert("Update ready - click ok to reload");
+        alert("Update ready - click ok to reload2");
+        window.applicationCache.swapCache();
         window.location = window.location;
     });
 }
