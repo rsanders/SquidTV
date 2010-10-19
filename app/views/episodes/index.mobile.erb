@@ -1,0 +1,8 @@
+<ul data-role="listview">
+<%- groupify(collection, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
+    (group, episodes) = pair
+-%>
+      <li data-role="list-divider">Aired less than <%= time_ago_in_words group %> ago</li>
+      <%= render :partial => "episode", :collection => episodes %>
+ <%- end -%>
+</ul>

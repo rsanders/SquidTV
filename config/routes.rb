@@ -20,6 +20,8 @@ Torvguide::Application.routes.draw do
 #  resources :movies
 #  resources :users
 
+  match 'site_variant' => 'main#variant', :as => :variant
+
   resources :media_roots
   resources :philes, :path => "files" do
     resource :episode

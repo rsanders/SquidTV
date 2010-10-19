@@ -1,0 +1,10 @@
+<%-
+    show = episode.show
+-%>
+<li>
+                <h3> <%= link_to_unless @show, show.name[0..30], show_episodes_path(show) %></h3>
+                <p><strong><%= link_to_if true, episode.title, episode_path(episode) %></strong></p>
+                <p><%= episode.overview %></p>
+                <p class="ui-li-aside"> <%= episode.season %> - <%= episode.number %></p>
+
+</li>
