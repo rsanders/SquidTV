@@ -40,6 +40,8 @@ gem 'tvdb_party'
 # for statfs
 gem 'ffi'
 
+gem 'rack-offline'
+
 # for admin
 # gem 'admin_data'
 

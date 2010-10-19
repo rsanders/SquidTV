@@ -22,6 +22,8 @@ Torvguide::Application.routes.draw do
 
   match 'site_variant' => 'main#variant', :as => :variant
 
+  match "/application.manifest" => Rails::Offline
+
   resources :media_roots
   resources :philes, :path => "files" do
     resource :episode
