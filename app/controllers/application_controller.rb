@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 
   def is_device_with_cookie?(device)
     variant = cookies[:site_variant] || params[:variant]
-    puts "with cookie called!"
     if variant == "normal"
       false
     elsif variant == device
@@ -39,7 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def is_mobile_device_with_cookie?
-    puts "imb with cookie called!"
     variant = cookies[:site_variant] || params[:variant]
 
     if variant == "normal"
