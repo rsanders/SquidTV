@@ -35,7 +35,8 @@ class Episode < ActiveRecord::Base
 
   # XXX: this is so very wrong
   def time_category
-    ActionController::Base.helpers.time_ago_in_words Groupify.groupify([self], Proc.new {|ep| ep.aired_at || ep.phile.file_created_at })[0][0]
+    # ActionController::Base.helpers.time_ago_in_words Groupify.groupify([self], Proc.new {|ep| ep.aired_at || ep.phile.file_created_at })[0][0]
+    ActionController::Base.helpers.time_ago_in_words self.aired_at
   end
 
   def as_json(options={})

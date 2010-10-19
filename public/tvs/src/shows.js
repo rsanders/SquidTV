@@ -50,13 +50,6 @@ torv.ShowList = new Ext.List ({
     grouped: true,
     iconCls: 'favorites',
     indexBar: true
-
-//    disclosure: {
-//        scope: 'test',
-//        handler: function(record, btn, index) {
-//            alert('Disclose more info for ' + record.get('name'));
-//        }
-//    }
 });
 
 torv.ShowList.on('itemtap', function(list, idx, el, e) {
