@@ -36,7 +36,7 @@ torv.ShowList = new Ext.List ({
     height: 500,
     xtype: 'list',
     store: torv.ShowStore,
-    loadingText: 'Loading...',
+    // loadingText: 'Loading...',
     tpl: '<tpl for="."><div class="show"><h3>{name}</h3>' +
             '<span class="episode_number">{unwatched_episode_count}</span>' +
             '</div></tpl>',
@@ -44,5 +44,19 @@ torv.ShowList = new Ext.List ({
     singleSelect: true,
     grouped: false,
     iconCls: 'favorites',
-    indexBar: true
+    indexBar: true,
+
+//    disclosure: {
+//        scope: 'test',
+//        handler: function(record, btn, index) {
+//            alert('Disclose more info for ' + record.get('name'));
+//        }
+//    }
+});
+
+torv.ShowList.on('itemtap', function(list, idx, el, e, detailCard) {
+    var ds = list.getStore(),
+        r  = ds.getAt(idx);
+    alert("Tapped on leaf! " + r.get('name') );
+    list.clearSelections();
 });
