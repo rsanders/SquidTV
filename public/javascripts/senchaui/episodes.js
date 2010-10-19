@@ -60,24 +60,6 @@ torv.Main.initEpisodeList = function() {
             list.clearSelections();
         },
 
-        showPopup: function(message) {
-            var popup = new Ext.Panel({
-                        floating: true,
-                        modal: true,
-                        centered: true,
-                        width: 300,
-                        styleHtmlContent: true,
-                        html: '<p>' + message + '</p>',
-                        dockedItems: [{
-                            dock: 'top',
-                            xtype: 'toolbar',
-                            title: 'Message'
-                        }],
-                        scroll: 'vertical'
-                    });
-                popup.show('pop');
-        },
-
         actions: new Ext.ActionSheet({
                         items: [{
                             text: 'Watch',
@@ -85,7 +67,7 @@ torv.Main.initEpisodeList = function() {
                             handler : function() {
                                 var     args = torv.EpisodeList.actions.args,
                                         episode = args.episode;
-                                torv.EpisodeList.showPopup("Watched " + episode.displayName());
+                                // torv.EpisodeList.showPopup("Watched " + episode.displayName());
                                 episode.watch();
                                 torv.EpisodeList.clearSelections();
                                 torv.EpisodeList.actions.hide();
@@ -127,7 +109,6 @@ torv.Main.initEpisodeList = function() {
             Ext.EventManager.addListener(this.id, 'doubletap', function(e) {
                 var list = this;
                 if (e.pageY < 30) {
-                    console.log("scrolling");
                     // fixes bug where old header stayed pinned to top
                     if (list.header) {
                         list.header.hide();
