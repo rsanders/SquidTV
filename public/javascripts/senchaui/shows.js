@@ -25,7 +25,7 @@ torv.Main.initShowList = function () {
         storeId: 'showStore',
 
         getGroupString : function(record) {
-            return record.get('name').substring(0,1);
+            return record.get('sortable_name').substring(0,1).toUpperCase();
         },
 
         proxy: {
