@@ -102,7 +102,40 @@ torv.Main.initEpisodeList = function() {
     });
 
     torv.EpisodeList.on('itemswipe', function(list, idx, el, e) {
-
         list.swipeAction(list, idx, el);
     });
+
+    torv.EpisodeList.on('containertap', function(list, e) {
+        var elapsed = 9999999;
+        if (this.lastTap) {
+            elapsed = e.time - this.lastTap;
+            console.log("elapsed: " + elapsed);
+        }
+        this.lastTap = e.time;
+        if (e.pageY < 30 && elapsed < 500) {
+            alert("Tap to top: " + elapsed);
+            this.lastTap = null;
+        }
+    });
+
+    // XXX: another weird hack dueto ignorance - we wait until after layout to add a
+    //     doubletap listener (otherwise the list isn't in the dom), and since
+    //     layout happens often, we guard this with a "static" flag
+
+    torv.EpisodeList.on('afterlayout', function() {
+        if (!this.addedDtapHandler) {
+            Ext.EventManager.addListener(torv.EpisodeList.id, 'doubletap', function(e) {
+                if (e.pageY < 30) {
+                    console.log("scrolling");
+                    // fixes bug where old header stayed pinned to top
+                    if (torv.EpisodeList.header) {
+                        torv.EpisodeList.header.hide();
+                    }
+                    torv.EpisodeList.scroller.scrollTo(0, 500);
+                }
+            });
+            this.addedDtapHandler = true;
+        }
+    });
+
 };
