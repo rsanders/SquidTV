@@ -9,9 +9,10 @@ Ext.regModel('Episode', {
 
 torv.EpisodeStore = new Ext.data.Store({
     model: 'Episode',
-    sorters: 'id',
+    // sorters: 'aired_at',
     getGroupString : function(record) {
-        return record.get('time_category');
+        return 'Aired ' + record.get('time_category') + ' ago'
+        // return record.get('aired_at')
     },
 
     // store configs
@@ -25,11 +26,6 @@ torv.EpisodeStore = new Ext.data.Store({
         reader: {
             type: 'json'
         }
-//        reader: {
-//            type: 'json',
-//            root: 'images',
-//            idProperty: 'id'
-//        }
     }
 });
 
