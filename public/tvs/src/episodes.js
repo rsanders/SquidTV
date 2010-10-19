@@ -1,6 +1,4 @@
-Ext.regModel('Show', {
-    fields: ['id', 'name']
-});
+
 
 Ext.regModel('Episode', {
     fields: ['id', 'title', 'show_name', {name: 'show', type: 'Show'},
