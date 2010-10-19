@@ -16,15 +16,6 @@ staging:
 production:
   debug: false
 
-## pre-production, june 22
-#production:
-#  site_root_url: http://prod.zeevex.com
-#  debug: true
-#  incomm_url: http://milws.incomm.com:8080/transferedvalue/gateway
-#  mail_domain: prod.zeevex.com
-#  google_analytics_code: UA-6469953-1
-
-
 all:
   tvdb_api_key: 630FCFC5489C56B0
 
