@@ -2,7 +2,10 @@ Ext.ns('torv', 'Ext.ux');
 
 torv.Main = {
     init : function() {
-        new Ext.TabPanel({
+        torv.Main.initEpisodeList();
+        torv.Main.initShowList();
+
+        torv.TabPanel = new Ext.TabPanel({
             fullscreen: true,
             sortable: false,
             tabBar: {

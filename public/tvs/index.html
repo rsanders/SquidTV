@@ -26,23 +26,6 @@
 	        font-size: 72px;
             padding-top: 100px;
 	    }
-	   /*.x-tabpanel > .x-panel-body .x-panel-body {*/
-	       /*padding: 100px 0;*/
-	       /*text-align: center;*/
-	       /*font-size: 72px;*/
-	       /*font-weight: bold;*/
-	       /*color: rgba(0,0,0,.2);*/
-	       /*text-shadow: rgba(255,255,255,.2) 0 1px 0;*/
-	       /*padding: 100px 15%;*/
-	   /*}*/
-	   /*.x-phone .x-tabpanel > .x-panel-body .x-panel-body {*/
-	       /*padding: 30px 20px;*/
-	       /*font-size: 36px;*/
-	   /*}*/
-	   /*.x-phone p {*/
-	       /*font-size: 16px;*/
-	       /*line-height: 18px;*/
-	   /*}*/
         span.episode_number {
             position: absolute;
             top: 10px;
@@ -59,12 +42,24 @@
 </head>
 <body>
 
-<!--
-<div id="my-tabs">
-    <div class="x-tab" title="Tab 1">A simple tab</div>
-    <div class="x-tab" title="Tab 2">Another one</div>
-</div>
--->
+<textarea id="episode" class="x-hidden-display">
+    <tpl for=".">
+        <div class="episode"><h3>{show_name}</h3>
+            <span class="episode_number">{season} - {number}</span>
+            <h4 class="title">{title}</h4>
+            <p class="overview">{overview}</p>
+        </div>
+    </tpl>
+</textarea>
+
+<textarea id="show" class="x-hidden-display">
+    <tpl for=".">
+        <div class="show">
+            <h3>{name}</h3>
+            <span class="episode_number">{unwatched_episode_count}</span>
+        </div>
+    </tpl>
+</textarea>
 
 </body>
 </html>
