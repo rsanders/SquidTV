@@ -22,9 +22,9 @@ torv.Main = {
 };
 
 Ext.setup({
-    tabletStartupScreen: '../resources/img/tablet_startup.png',
-    phoneStartupScreen: '../resources/img/phone_startup.png',
-    icon: '../resources/img/icon.png',
+    tabletStartupScreen: '/images/tablet_startup.png',
+    phoneStartupScreen: '/images/phone_startup.png',
+    icon: '/images/icon.png',
     glossOnIcon: false,
 
     onReady: function() {
