@@ -1,3 +1,4 @@
+<% @title = "Episodes for #{@show.name}" if @show -%>
 <ul data-role="listview">
 <%- groupify(collection, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
     (group, episodes) = pair

@@ -1,5 +1,5 @@
 
-jQuery('.episode').live('click', function(ev) {
+jQuery('li.clickable').live('click', function(ev) {
     // jQuery(ev.currentTarget).slideUp();
     jQuery(ev.currentTarget).ajaxClick();
 });

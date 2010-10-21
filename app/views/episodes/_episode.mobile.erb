@@ -1,10 +1,6 @@
 <%-
     show = episode.show
-    if @show
-        click_url = ""
-    else
-        click_url = show_episodes_path(show)
-    end
+    click_url = episode_path(episode)
 -%>
 <li class="episode clickable" href="<%= click_url %>" >
                 <h3> <%= link_to_if false, show.name[0..30], show_episodes_path(show) %></h3>
