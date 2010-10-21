@@ -1,7 +1,7 @@
 
-jQuery('li.clickable').live('click tap', function(ev) {
-    jQuery(ev.currentTarget).ajaxClick();
-});
+//        jQuery('li.clickable').live('click tap', function(ev) {
+//            jQuery(ev.currentTarget).ajaxClick();
+//        });
 
 if (window.applicationCache) {
     window.applicationCache.addEventListener('updateready', function() {
