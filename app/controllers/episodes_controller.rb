@@ -63,7 +63,7 @@ class EpisodesController < ApplicationController
 
     # XXX - hack to work around jQuery Mobile crashes
     if in_mobile_view?
-      base = base.limit(40)
+      base = base.limit(80)
     end
     @episodes ||= base.order("aired_at desc").includes([:show, :phile])
   end
