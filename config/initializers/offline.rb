@@ -3,7 +3,7 @@ TORV_OFFLINE = Rails::Offline.configure do
     "#{root}/**/*.html",
     "#{root}/stylesheets/**/*.css",
     "#{root}/javascripts/**/*.js",
-    "#{root}/jqm/**/*",
+    "#{root}/jqm/**/*.*",
     "#{root}/images/**/*.*"]
 
   files.each do |file|
