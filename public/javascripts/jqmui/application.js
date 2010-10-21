@@ -1,6 +1,5 @@
 
-jQuery('li.clickable').live('click', function(ev) {
-    // jQuery(ev.currentTarget).slideUp();
+jQuery('li.clickable').live('click tap', function(ev) {
     jQuery(ev.currentTarget).ajaxClick();
 });
 
