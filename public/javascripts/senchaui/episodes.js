@@ -15,6 +15,85 @@ torv.Episode = Ext.regModel('Episode', {
     }
 });
 
+torv.EpisodeListType = Ext.extend(Ext.List, {
+        title: 'Episodes',
+        width: Ext.is.Phone ? undefined : 300,
+        height: 500,
+        xtype: 'list',
+        store: torv.EpisodeStore,
+        loadingText: 'Loading...',
+        // tpl: Ext.XTemplate.from('episode'),
+        itemSelector: 'div.episode',
+        singleSelect: true,
+        grouped: true,
+        iconCls: 'user',
+        indexBar: false,
+
+        initComponent: function() {
+            var list= this;
+
+            torv.EpisodeListType.superclass.initComponent.call(this, arguments);
+
+            this.on('itemswipe', function(list, idx, el, e) {
+                list.swipeAction(list, idx, el);
+            });
+
+            // XXX: another weird hack due to ignorance - we wait until after layout to add a
+            //     doubletap listener (otherwise the list isn't in the dom), and since
+            //     layout happens often, we guard this with a "static" flag
+
+            this.on('afterlayout', function() {
+                if (!list.addedDtapHandler) {
+                    Ext.EventManager.addListener(this.id, 'doubletap', function(e) {
+                        if (e.pageY < 30) {
+                            // fixes bug where old header stayed pinned to top
+                            if (list.header) {
+                                list.header.hide();
+                            }
+                            list.scroller.scrollTo(0, 500);
+                        }
+                    }, this);
+                    this.addedDtapHandler = true;
+                }
+            });
+        },
+
+        swipeAction: function(list, idx, el) {
+            var ds = list.getStore(),
+                    r  = ds.getAt(idx);
+            list.showActionSheet({episode: r, list: list, idx: idx, el: el});
+            list.clearSelections();
+        },
+
+        showActionSheet: function(args) {
+            var list = args.list;
+            // this.actionArgs = args;
+            var actionSheet = new Ext.ActionSheet({
+                items: [{
+                    text: 'Watch',
+                    ui: 'confirm-round',
+                    handler : function() {
+                        var     // args = list.actionArgs,
+                                episode = args.episode;
+                        episode.watch();
+                        list.clearSelections();
+                        actionSheet.hide();
+                    }
+                },{
+                    text : 'Cancel',
+                    ui: 'decline',
+                    handler : function(){
+                        actionSheet.hide();
+                    }
+                }]
+            });
+
+            actionSheet.show();
+        }
+
+    });
+
+
 torv.Main.initEpisodeList = function() {
     torv.EpisodeStore = new Ext.data.Store({
         model: 'Episode',
@@ -37,74 +116,10 @@ torv.Main.initEpisodeList = function() {
         }
     });
 
-
-    torv.EpisodeList = new Ext.List ({
+    torv.EpisodeList = new torv.EpisodeListType ({
         title: 'Episodes',
-        width: Ext.is.Phone ? undefined : 300,
-        height: 500,
-        xtype: 'list',
         store: torv.EpisodeStore,
         loadingText: 'Loading...',
-        tpl: Ext.XTemplate.from('episode'),
-        itemSelector: 'div.episode',
-        singleSelect: true,
-        grouped: true,
-        iconCls: 'user',
-        indexBar: false,
-
-        swipeAction: function(list, idx, el) {
-            var ds = list.getStore(),
-                    r  = ds.getAt(idx);
-            this.actions.args = {episode: r, list: list, idx: idx, el: el};
-            this.actions.show();
-            list.clearSelections();
-        },
-
-        actions: new Ext.ActionSheet({
-                        items: [{
-                            text: 'Watch',
-                            ui: 'confirm-round',
-                            handler : function() {
-                                var     args = torv.EpisodeList.actions.args,
-                                        episode = args.episode;
-                                // torv.EpisodeList.showPopup("Watched " + episode.displayName());
-                                episode.watch();
-                                torv.EpisodeList.clearSelections();
-                                torv.EpisodeList.actions.hide();
-                            }
-                        },{
-                            text : 'Cancel',
-                            ui: 'decline',
-                            handler : function(){
-                                torv.EpisodeList.actions.hide();
-                            }
-                        }]
-        })
-
+        tpl: Ext.XTemplate.from('episode')
     });
-
-    torv.EpisodeList.on('itemswipe', function(list, idx, el, e) {
-        list.swipeAction(list, idx, el);
-    });
-
-    // XXX: another weird hack dueto ignorance - we wait until after layout to add a
-    //     doubletap listener (otherwise the list isn't in the dom), and since
-    //     layout happens often, we guard this with a "static" flag
-
-    torv.EpisodeList.on('afterlayout', function() {
-        if (!this.addedDtapHandler) {
-            Ext.EventManager.addListener(this.id, 'doubletap', function(e) {
-                var list = this;
-                if (e.pageY < 30) {
-                    // fixes bug where old header stayed pinned to top
-                    if (list.header) {
-                        list.header.hide();
-                    }
-                    list.scroller.scrollTo(0, 500);
-                }
-            }, this);
-            this.addedDtapHandler = true;
-        }
-    });
-
 };

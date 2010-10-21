@@ -43,5 +43,3 @@ module Rails
   end
 end
 
-puts "VENDORED OFFLINE"
-

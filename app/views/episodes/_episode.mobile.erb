@@ -1,9 +1,14 @@
 <%-
     show = episode.show
+    if @show
+        click_url = ""
+    else
+        click_url = show_episodes_path(show)
+    end
 -%>
-<li>
-                <h3> <%= link_to_unless @show, show.name[0..30], show_episodes_path(show) %></h3>
-                <p><strong><%= link_to_if true, episode.title, episode_path(episode) %></strong></p>
+<li class="episode clickable" href="<%= click_url %>" >
+                <h3> <%= link_to_if false, show.name[0..30], show_episodes_path(show) %></h3>
+                <p><strong><%= link_to_if false, episode.title, episode_path(episode) %></strong></p>
                 <p><%= episode.overview %></p>
                 <p class="ui-li-aside"> <%= episode.season %> - <%= episode.number %></p>
 

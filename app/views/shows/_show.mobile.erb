@@ -1,0 +1,6 @@
+<li class="show clickable" href="<%= url_for show %>" >
+  <h3><%= show.name %></h3>
+  <%- if show.unwatched_episode_count > 0 %>
+  <p class="ui-li-aside"> <%= show.unwatched_episode_count  %></p>
+  <%- end -%>
+</li>
