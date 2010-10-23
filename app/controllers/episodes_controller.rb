@@ -25,6 +25,10 @@ class EpisodesController < ApplicationController
 #    end
 #  end
 
+  def popup
+    
+  end
+
   def watch
     resource.mark_seen!
     respond_to do |fmt|

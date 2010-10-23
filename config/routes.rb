@@ -46,6 +46,9 @@ Torvguide::Application.routes.draw do
       post :watch
       post :unwatch
     end
+    collection do
+      get :popup
+    end
   end
 
   # Sample resource route with options:

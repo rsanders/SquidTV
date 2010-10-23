@@ -8,4 +8,16 @@
 <h3>Overview</h3>
 <p><%= episode.overview %></p>
 
+<div data-role="fieldcontain">
+	<select name="watched" id="watched_<%= episode.id %>"
+            data-episode-id="<%= episode.id %>"
+            data-role="slider">
+		<option value="off">Unwatched</option>
+		<option value="on" selected>Watched</option>
+	</select> 
+</div>
 
+
+<div>
+  <a href="/episodes/popup">Mark Watched</a>
+</div>
