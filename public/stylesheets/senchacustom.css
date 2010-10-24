@@ -1,4 +1,15 @@
-.card1, .card2, .card3 {                 
+.showdetail {
+    background-color: #376daa;
+    text-align: center;
+    color: #204167;
+    text-shadow: #3F80CA 0 1px 0;
+    font-size: 20px;
+    padding-top: 100px;
+    height: 100%;
+    width: 100%;
+}
+
+.card1, .card2, .card3 {
     background-color: #376daa;
     text-align: center;
     color: #204167;

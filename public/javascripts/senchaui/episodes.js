@@ -42,6 +42,13 @@ torv.EpisodeListType = Ext.extend(Ext.List, {
                 list.swipeAction(list, idx, el);
             });
 
+            this.on('itemtap', function(list, idx, el, e) {
+                var ds = list.getStore(),
+                        r  = ds.getAt(idx);
+                list.clearSelections();
+                list.showEpisode(r);
+            });
+
             // XXX: another weird hack due to ignorance - we wait until after layout to add a
             //     doubletap listener (otherwise the list isn't in the dom), and since
             //     layout happens often, we guard this with a "static" flag
@@ -67,6 +74,29 @@ torv.EpisodeListType = Ext.extend(Ext.List, {
                     r  = ds.getAt(idx);
             list.showActionSheet({episode: r, list: list, idx: idx, el: el});
             list.clearSelections();
+        },
+
+        showEpisode: function(episode) {
+            var panel;
+            panel = new Ext.Panel({
+                fullscreen: true,
+                dockedItems: [{
+                    dock: 'top',
+                    xtype: 'toolbar',
+                    type: 'light',
+                    items: [new Ext.Button({
+                        text: 'Back',
+                        ui: 'back',
+                        handler: function() { panel.hide({type: 'cube', duration: 400}); },
+                        scope: panel})]
+                }],
+                items: [{xtype: 'panel',
+                    fullscreen: true,
+                    cls: 'showdetail',
+                    tpl: Ext.XTemplate.from('episode_detail'),
+                    data: episode.data
+                }]
+            });
         },
 
         showActionSheet: function(args) {

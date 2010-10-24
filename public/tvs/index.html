@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=320,user-scalable=false" />
     <link href="/images/apple-touch-icon.png" rel="apple-touch-icon"/>
     <meta name=apple-mobile-web-app-capable content=yes>
-  
+
     <!-- <link rel="stylesheet" href="../sencha/css/sencha-touch.css" type="text/css"> -->
     <link rel="stylesheet" href="/stylesheets/sencha/css/apple.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/senchacustom.css" type="text/css">
@@ -39,6 +39,18 @@
         <div class="show">
             <h3>{name}</h3>
             <span class="episode_number">{unwatched_episode_count}</span>
+        </div>
+    </tpl>
+</textarea>
+
+<textarea id="episode_detail" class="x-hidden-display">
+    <tpl for=".">
+        <div class="episode_detail">
+            <h3>{show_name}</h3>
+            <span class="episode_number">{season} - {number}</span>
+            <div>
+                <p class="overview">{overview}</p>
+            </div>
         </div>
     </tpl>
 </textarea>
