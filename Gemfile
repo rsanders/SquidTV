@@ -57,6 +57,9 @@ gem 'haml'
 gem 'compass'
 gem 'html5-boilerplate'
 
+# jquery all the way
+gem 'jquery-rails'
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
