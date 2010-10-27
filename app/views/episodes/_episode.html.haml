@@ -1,0 +1,7 @@
+- show = episode.show
+%tr{:class => episode.seen_at ? 'seen' : 'unseen', :id => "episode_#{episode.id}"}
+  %td.parsed= link_to show.name[0..30], show_episodes_path(show)
+  %td= episode.season
+  %td= episode.number
+  %td.action= state_button(episode)
+  %td.title= link_to episode.title, episode_path(episode)
