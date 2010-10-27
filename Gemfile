@@ -49,6 +49,9 @@ gem 'rack-offline', :path => 'vendor/gems/rack-offline'
 gem "meta_where"
 gem "meta_search"
 
+# forget JS, I'm doing coffeescript now
+gem 'barista', '>= 0.5.0'
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
