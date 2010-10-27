@@ -34,11 +34,7 @@ class EpisodesController < ApplicationController
     respond_to do |fmt|
       fmt.html { redirect_to :episodes }
       fmt.json { head :code => 200 }
-      fmt.js {
-          render :update do |page|
-            page["episode_#{resource.id}"].replace :partial => "episode", :object => resource
-          end
-      }
+      fmt.js
     end
   end
 
@@ -47,11 +43,7 @@ class EpisodesController < ApplicationController
     respond_to do |fmt|
       fmt.html { redirect_to :episodes }
       fmt.json { head :code => 200 }
-      fmt.js {
-          render :update do |page|
-            page["episode_#{resource.id}"].replace :partial => "episode", :object => resource
-          end
-      }
+      fmt.js
     end
   end
 

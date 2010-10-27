@@ -1,0 +1,2 @@
+jQuery("#episode_<%= resource.id %>").
+        replaceWith("<%= escape_javascript(render :partial => "episode", :object => resource) %>");
