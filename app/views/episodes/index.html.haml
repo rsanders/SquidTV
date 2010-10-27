@@ -6,6 +6,6 @@
   - groupify(collection, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
     - (group, episodes) = pair
     %tr.group
-    %td{:colspan => "5"}
-    Aired less than #{time_ago_in_words group} ago
+      %td{:colspan => "5"}
+        Aired less than #{time_ago_in_words group} ago
     = render :partial => "episode", :collection => episodes
