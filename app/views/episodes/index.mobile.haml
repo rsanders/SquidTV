@@ -1,8 +1,8 @@
-- @title = "Episodes for #{@show.name}" if @show
+-# @title = "Episodes for #{@show.name}" if @show
 %ul{"data-role" => "listview", "data-theme" => "d"}
   - groupify(collection, Proc.new {|ep| ep.aired_at || ep.phile.file_created_at }).each do |pair|
-  - (group, episodes) = pair
+    - (group, episodes) = pair
     %li{"data-role" => "list-divider"}
       Aired less than #{time_ago_in_words group} ago
-  = render :partial => "episode", :collection => episodes
-- content_for :extra_pages do
+    = render :partial => "episode", :collection => episodes
+
