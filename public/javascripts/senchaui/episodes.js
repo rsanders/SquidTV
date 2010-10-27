@@ -36,7 +36,8 @@ torv.EpisodeListType = Ext.extend(Ext.List, {
         initComponent: function() {
             var list= this;
 
-            torv.EpisodeListType.superclass.initComponent.call(this, arguments);
+            // torv.EpisodeListType.superclass.initComponent.call(this, arguments);
+            this.supr().initComponent.call(this, arguments);
 
             this.on('itemswipe', function(list, idx, el, e) {
                 list.swipeAction(list, idx, el);
