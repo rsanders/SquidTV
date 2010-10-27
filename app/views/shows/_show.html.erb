@@ -1,5 +1,0 @@
-<tr>
-  <td><%= link_to show.name, show %></td>
-  <td><%= link_to show.unwatched_episode_count, show_episodes_path(show, :all => true) %></td>
-  <td><%= show.latest_unwatched_episode_at  ? time_ago_in_words(show.latest_unwatched_episode_at) : "NONE" %></td>
-</tr>

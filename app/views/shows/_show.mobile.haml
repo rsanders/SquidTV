@@ -1,0 +1,5 @@
+%li.show.clickable{"data-show-id" => show.id, :href => show_episodes_path show}
+  %h3= link_to_if false, show.name, show_episodes_path(show)
+  - if show.unwatched_episode_count > 0
+    %p.ui-li-aside
+      = show.unwatched_episode_count
