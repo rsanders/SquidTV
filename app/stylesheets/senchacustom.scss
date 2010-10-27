@@ -1,0 +1,55 @@
+.showdetail {
+  background-color: #376daa;
+  text-align: center;
+  color: #204167;
+  text-shadow: #3F80CA 0 1px 0;
+  font-size: 20px;
+  padding-top: 100px;
+  height: 100%;
+  width: 100%; }
+
+.card1, .card2, .card3 {
+  background-color: #376daa;
+  text-align: center;
+  color: #204167;
+  text-shadow: #3F80CA 0 1px 0;
+  font-size: 72px;
+  padding-top: 100px; }
+
+span.episode_number {
+  position: absolute;
+  top: 10px;
+  right: 2.5em; }
+
+.episode {
+  p.overview {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+  .details {
+    overflow: hidden;
+    color: #666666;
+    text-overflow: ellipsis;
+    max-height: 2.5em; }
+  h3 {
+    /* color: #204167; */
+    color: #333333;
+    text-shadow: #fff 1px 1px 0;
+    font-weight: bold;
+    /* text-shadow: #3F80CA 0 1px 0;*/ } }
+
+.episode_number {
+  /* color: #204167; */
+  color: #333333;
+  text-shadow: #fff 1px 1px 0;
+  font-weight: bold;
+  /* text-shadow: #3F80CA 0 1px 0;*/ }
+
+.episode {
+  .title {
+    font-size: 14px;
+    font-style: italic;
+    &:after {
+      content: " \2014 "; } }
+  .overview {
+    font-size: 8px; } }

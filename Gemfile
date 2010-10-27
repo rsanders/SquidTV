@@ -52,6 +52,14 @@ gem "meta_search"
 # forget JS, I'm doing coffeescript now
 gem 'barista', '>= 0.5.0'
 
+# about to get meta-css and html5-boilerplatey
+gem 'haml'
+gem 'compass'
+gem 'html5-boilerplate'
+
+# jquery all the way
+gem 'jquery-rails'
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'

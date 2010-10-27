@@ -1,0 +1,7 @@
+%table
+  - resource.attributes.each do |a|
+    %tr
+      %th= a[0]
+      %td= a[1]
+%p= link_to "Edit", edit_media_root_path(resource)
+%p= link_to "Back", polymorphic_path(controller_name)

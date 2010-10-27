@@ -1,0 +1,19 @@
+%ul.horizontal_menu
+  %li= link_to "All Shows", shows_path
+  %li= link_to "Recent Shows", shows_path(:recent => true)
+%hr/
+= form_for @search, :url => shows_path, :html => {:method => :get} do |f|
+  = f.label :name_contains
+  = f.text_field :name_contains
+  %br/
+  %br/
+  / etc...
+  = f.submit
+%table
+  %thead
+    %tr
+      %th= sort_link @search, :sortable_name, "Name"
+      %th= sort_link @search, :unwatched_episode_count
+      %th= sort_link @search, :latest_unwatched_episode_at
+  %tbody
+    = render :partial => "search_results", :locals => {:search_results => collection}

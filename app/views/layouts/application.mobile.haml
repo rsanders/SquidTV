@@ -1,0 +1,22 @@
+- if ! request.xhr?
+  !!!
+  %html{:manifest => "/application.manifest"}
+    %head
+      %title= @title || "Torvguide"
+      %link{:href => "/jqm/jquery.mobile-1.0a1.min.css", :rel => "stylesheet"}/
+      %script{:src => "/javascripts/jquery/jquery-1.4.3.min.js"}
+      %script{:src => "/javascripts/underscore.js"}
+      %script{:src => "/jqm/jquery.mobile-1.0a1.min.js"}
+      %script{:src => "/javascripts/jqmui/application.js"}
+      = csrf_meta_tag
+      %meta{:content => "width=320,user-scalable=false", :name => "viewport"}/
+      %link{:href => image_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
+      %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %body
+%div{"data-role" => "page", :id => request.path}
+  = render :partial => "shared/main_header"
+  %div{"data-role" => "content"}
+    = yield
+  = render :partial => "shared/main_footer"
+= yield :extra_pages
+- if ! request.xhr?

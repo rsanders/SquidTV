@@ -1,0 +1,15 @@
+- episode = resource
+- show = episode.show
+%h1= link_to show.name[0..30], show_episodes_path(show)
+%p
+  Season #{episode.season}, Episode #{episode.number}
+%p
+  %strong= episode.title
+%h3 Overview
+%p= episode.overview
+%div{"data-role" => "fieldcontain"}
+  %select{"data-episode-id" => episode.id, "data-role" => "slider", :id => "watched_#{episode.id}", :name => "watched"}
+    %option{:value => "off"} Unwatched
+    %option{:selected => "", :value => "on"} Watched
+%div
+  %a{:href => "/episodes/popup"} Mark Watched

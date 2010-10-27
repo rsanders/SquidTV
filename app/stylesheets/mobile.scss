@@ -1,0 +1,25 @@
+ul.horizontal_menu li {
+  display: inline;
+  list-style-image: none; }
+
+table {
+  width: 100%; }
+
+td.unparsed {
+  font-style: italic; }
+
+tr.group {
+  background-color: #2f4f4f;
+  color: white;
+  td {
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
+    margin: 8px; } }
+
+table#episode-list td.title {
+  text-align: right; }
+
+.seen {
+  opacity: 0.3; }

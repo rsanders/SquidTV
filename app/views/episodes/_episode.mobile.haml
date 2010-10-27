@@ -1,0 +1,11 @@
+- show = episode.show
+- click_url = episode_path(episode)
+%li.episode.clickable{"data-episode-id" => episode.id, "data-show-id" => episode.show_id, :href => click_url}
+  %h3
+    = link_to_if false, show.name[0..30], show_episodes_path(show)
+  %p
+    %strong= link_to_if false, episode.title, episode_path(episode)
+  %p= episode.overview
+  %p.ui-li-aside
+    = episode.season
+    \- #{episode.number}

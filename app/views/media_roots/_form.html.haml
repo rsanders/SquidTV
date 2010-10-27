@@ -1,0 +1,17 @@
+%table
+  - form_for resource, :as => :media_root, :url => media_root_path(resource) do |f|
+    - if resource.errors.any?
+      %tr
+        %td{:colspan => "2"}
+          %h2
+            = pluralize(resource.errors.count, "error")
+            prohibited this from being saved:
+          %ul
+            - resource.errors.full_messages.each do |msg|
+              %li= msg
+    - resource.attributes.each do |a|
+      %tr
+        %td= a[0]
+        %td= f.text_field a[0].to_sym
+    %tr
+      %td{:colspan => "2"}= f.submit
