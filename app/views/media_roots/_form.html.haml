@@ -1,11 +1,11 @@
 %table
-  - form_for(resource) do |f|
+  - form_for resource, :as => :media_root, :url => media_root_path(resource) do |f|
     - if resource.errors.any?
       %tr
         %td{:colspan => "2"}
           %h2
             = pluralize(resource.errors.count, "error")
-            prohibited this testa from being saved:
+            prohibited this from being saved:
           %ul
             - resource.errors.full_messages.each do |msg|
               %li= msg
