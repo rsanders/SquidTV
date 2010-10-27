@@ -54,6 +54,7 @@ gem 'barista', '>= 0.5.0'
 
 # about to get meta-css and html5-boilerplatey
 gem 'haml'
+gem 'compass'
 gem 'html5-boilerplate'
 
 # Bundle the extra gems:

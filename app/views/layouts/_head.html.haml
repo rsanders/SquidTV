@@ -13,8 +13,11 @@
   %meta{ :content => "", :name => "author" }/
   
   -# Mobile viewport optimized: j.mp/bplateviewport
-  %meta{ :content => "width=device-width; initial-scale=1.0", :name => "viewport" }/
-  
+  -# %meta{ :content => "width=device-width; initial-scale=1.0", :name => "viewport" }/
+
+  %meta{:content => "width=320,user-scalable=false", :name => "viewport"}/
+  %link{:href => image_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
+
   -# Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references
   -# %link{ :href => "/favicon.ico", :rel => "shortcut icon" }/
   -# %link{ :href => "/apple-touch-icon.png", :rel => "apple-touch-icon" }/
