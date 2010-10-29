@@ -11,10 +11,9 @@ torv.Episode = Ext.regModel('Episode', {
     },
 
     watch: function() {
-        $.ajax({url: '/episodes/' + this.get('id') + '/watch',
-                type: 'POST',
-                dataType: 'json'
-        });
+        Ext.Ajax.request({url: '/episodes/' + this.get('id') + '/watch', 
+                          method: 'POST',
+                          headers: {'Accept': 'application/json'}});
         this.store.remove(this);
     }
 });
